@@ -22,7 +22,7 @@ class BusinessController extends Controller
         }
 
         $p9->update([
-            "organization_name" => $request->name_of_organisation,
+            "organisation_name" => $request->name_of_organisation,
             "kra_pin" => $request->kra_pin,
         ]);
 
