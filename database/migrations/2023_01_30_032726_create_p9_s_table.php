@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\P9;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,8 +17,9 @@ return new class extends Migration
         Schema::create('p9_s', function (Blueprint $table) {
             $table->id();
             $table->string("code")->unique();
-            $table->string("account_type");
-            $table->string("organisation_name")->nullable();
+            $table->string("account_type")->default(P9::ACCOUNT_TYPES['INDIVIDUAL']);
+            $table->string("year")->default(2023);
+            $table->string("name")->nullable();
             $table->string("kra_pin")->nullable();
             $table->string("basic_salary")->nullable();
             $table->string("duration")->nullable();

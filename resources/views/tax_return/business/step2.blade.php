@@ -61,22 +61,22 @@
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Name of Organisation</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid" name="name_of_organisation" placeholder="" value="" />
-                    <!--end::Input-->
-                </div>
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3"> KRA PIN</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid" name="kra_pin" placeholder="" value="" />
-                    <!--end::Input-->
-                </div>
+{{--                <div class="mb-10 fv-row">--}}
+{{--                    <!--begin::Label-->--}}
+{{--                    <label class="form-label mb-3">Name of Organisation</label>--}}
+{{--                    <!--end::Label-->--}}
+{{--                    <!--begin::Input-->--}}
+{{--                    <input type="text" class="form-control form-control-lg form-control-solid" name="name_of_organisation" placeholder="" value="" />--}}
+{{--                    <!--end::Input-->--}}
+{{--                </div>--}}
+{{--                <div class="mb-10 fv-row">--}}
+{{--                    <!--begin::Label-->--}}
+{{--                    <label class="form-label mb-3"> KRA PIN</label>--}}
+{{--                    <!--end::Label-->--}}
+{{--                    <!--begin::Input-->--}}
+{{--                    <input type="text" class="form-control form-control-lg form-control-solid" name="kra_pin" placeholder="" value="" />--}}
+{{--                    <!--end::Input-->--}}
+{{--                </div>--}}
 
 
                 <!--end::Input group-->
@@ -147,23 +147,6 @@
 
 @stop
 
-
-@section("js")
-    <script>
-        $(function (){
-
-            $("#billing2").prop("checked",true);
-
-            $("#billing1, #billing2").on("change",function(){
-                // alert($(this).val())
-
-                $("#billing1, #billing2").prop('checked',false);
-                $(this).prop('checked',true);
-
-            })
-        })
-    </script>
-@stop
 
 
 

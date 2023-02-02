@@ -15,9 +15,11 @@ class GenerateP9Controller extends Controller
     {
         if ($request->isMethod("GET")) return view("tax_return.step1");
 
-        $p9 = P9::create([
-            "account_type" => $request->account_type
-        ]);
+        if (!$request->has("code") || empty($p9 = P9::whereCode($request->code)->first())) {
+            $p9 = P9::create([
+                "account_type" => $request->account_type
+            ]);
+        }
 
         if ($p9->account_type == 'corporate')
             return redirect()->route("business_step_2", ['code' => $p9->code])
@@ -37,18 +39,15 @@ class GenerateP9Controller extends Controller
 
     public function step2(Request $request)
     {
-        if (!request()->has("code")) return redirect()->route("generate_p9_step_1");
 
-        if ($request->isMethod("GET")) return view("tax_return.step2");
+        if (!request()->has("code")) return redirect()->route("generate_p9_step_1");
 
         $p9 = P9::whereCode($request->code)->firstOrFail();
 
-        $p9->update([
-            "organisation_name" => $request->organisation_name,
-            "kra_pin" => $request->kra_pin,
-            "basic_salary" => $request->basic_salary,
-            "duration" => $request->has("month") ? "month" : "year"
-        ]);
+
+        if ($request->isMethod("GET")) return view("tax_return.step2",compact("p9"));
+
+        $p9->update($request->only(["name", "kra_pin", "basic_salary", "year",]));
 
         return redirect()->route("generate_p9_step_3", ['code' => $request->code])
             ->with([

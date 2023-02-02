@@ -17,7 +17,7 @@ class StreamSeeder extends Seeder
     {
         $items = [
           "rentals",
-          "employment",
+//          "employment",
           "capital gains",
           "royalty",
           "business",

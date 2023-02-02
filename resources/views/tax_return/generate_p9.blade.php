@@ -133,8 +133,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Icon-->
                                 <!--begin::Label-->
                                 <div class="stepper-label">
-                                    <h3 class="stepper-title fs-2">Tax Details</h3>
-                                    <div class="stepper-desc fw-normal">Enter your Tax Details</div>
+                                    <h3 class="stepper-title fs-2">Personal Details</h3>
+                                    <div class="stepper-desc fw-normal">Enter your Personal Details</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -156,8 +156,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Icon-->
                                 <!--begin::Label-->
                                 <div class="stepper-label">
-                                    <h3 class="stepper-title fs-2">Employer Details</h3>
-                                    <div class="stepper-desc fw-normal">Enter Employer details</div>
+                                    <h3 class="stepper-title fs-2">Other Income and Deductions</h3>
+                                    <div class="stepper-desc fw-normal">Other Income and Deductions</div>
                                 </div>
                                 <!--end::Label-->
                             </div>

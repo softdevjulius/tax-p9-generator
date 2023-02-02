@@ -27,6 +27,34 @@
                             <div class="col">
                                 <div class="fv-row mb-10">
                                     <!--begin::Label-->
+                                    <label class="form-label "> {{$stream->name}} Business Name </label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input name="business_name[{{$stream->id}}]" type="text"
+                                           class="form-control form-control-lg form-control-solid" value=""/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="fv-row mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label "> {{$stream->name}} Pin </label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input name="pin[{{$stream->id}}]" type="text"
+                                           class="form-control form-control-lg form-control-solid" value=""/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+
+
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col">
+                                <div class="fv-row mb-10">
+                                    <!--begin::Label-->
                                     <label class="form-label "> {{$stream->name}} Income </label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
@@ -119,280 +147,6 @@
 
     </form>
 
-@stop
-
-
-@section("js")
-    <script>
-        $(function (){
-
-            $("#billing2").prop("checked",true);
-
-            $("#billing1, #billing2").on("change",function(){
-                // alert($(this).val())
-
-                $("#billing1, #billing2").prop('checked',false);
-                $(this).prop('checked',true);
-
-            })
-        })
-    </script>
-@stop
-
-
-
-@section("others")
-
-    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" action="{{route("generate_p9_step_3")}}" method="post">
-        @csrf
-        <!--begin::Step 1-->
-
-        <!--end::Step 1-->
-        <!--begin::Step 2-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-15">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Tax Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="mb-10 fv-row">
-                    <div class="form-check form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="1" id="billing1"
-                               name="year"
-                               data-kt-settings-notification="email"/>
-                        <label class="form-check-label ps-2" for="billing1"> Year</label>
-                    </div>
-                    </br>
-                    <div class="form-check form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="" id="billing2"
-                               name="year"
-                               data-kt-settings-notification="phone"/>
-                        <label class="form-check-label ps-2" for="billing2">Monthly</label>
-                    </div>
-
-
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Name of Organisation</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid"
-                           name="name_of_organisation" placeholder="" value=""/>
-                    <!--end::Input-->
-                </div>
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Personal KRA PIN</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid"
-                           name="kra_pin" placeholder="" value=""/>
-                    <!--end::Input-->
-                </div>
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Basic Salary</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="number" class="form-control form-control-lg form-control-solid"
-                           name="basic_salary" placeholder="" value=""/>
-                    <!--end::Input-->
-                </div>
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Step 2-->
-        <!--begin::Step 3-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-12">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Company Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label required"> Organisation Name </label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label required"> Organisation KRA PIN</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label "> Allowances </label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label "> Deductions </label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Step 3-->
-        <!--begin::Step 4-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-15">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Billing Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Phone Number</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter yoiur phone and Press pay then check youur phone"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="card_name" value=""/>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
-                    <!--end::Label-->
-                    <!--begin::Input wrapper-->
-                    <input type="number" class="form-control form-control-solid" placeholder=""
-                           name="amount" value="100"/>
-                    <!--end::Input wrapper-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Step 4-->
-        <!--begin::Step 5-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-
-
-                <!--begin::Heading-->
-                <div class="pb-8 pb-lg-10">
-                    <!--begin::Title-->
-                    <div class="fv-row mb-0">
-                        <!--begin::Label-->
-                        <label class="fs-6 fw-semibold form-label "> Email</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input name="business_email"
-                               class="form-control form-control-lg form-control-solid"
-                               value="email@company.com"/>
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <div class="d-flex flex-stack">
-                    <!--begin::Label-->
-                    <button type="button" class="btn btn-lg btn-primary"
-                            data-kt-stepper-action="Finish">
-											<span class="indicator-label" class="bi-cloud-download">Download Draft
-                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-
-                                                <!--end::Svg Icon--></span>
-
-
-                    </button>
-                    <!--end::Label-->
-                    <!--begin::Switch-->
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="1"/>
-                        <span class="form-check-label fw-semibold text-muted"> Send to Mail</span>
-                    </label>
-                    <!--end::Switch-->
-
-                </div>
-
-                </br>
-                </br>
-                </br>
-                </br>
-                </br>
-                <!--end::Heading-->
-                <!--begin::Body-->
-                <p> Disclaimer content</p>
-                <!--end::Body-->
-            </div>
-
-
-
-
-            <!--end::Wrapper-->
-        </div>
-
-    </form>
 @stop
 
 

@@ -25,7 +25,9 @@ return new class extends Migration
 //                ->onDelete("cascade")->onUpdate("cascade")
             ;
 
-            $table->string("name");
+            $table->string("business_name")->nullable();
+            $table->string("pin")->nullable();
+            $table->string("name")->nullable();
             $table->decimal("amount",20)->default(0);
             $table->decimal("expense",20)->default(0);
 

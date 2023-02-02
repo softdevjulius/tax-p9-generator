@@ -21,10 +21,11 @@ class BusinessController extends Controller
             return view("tax_return.business.step2",compact("streams"));
         }
 
-        $p9->update([
-            "organisation_name" => $request->name_of_organisation,
-            "kra_pin" => $request->kra_pin,
-        ]);
+//        $p9->update([
+//            "organisation_name" => $request->name_of_organisation,
+//            "kra_pin" => $request->kra_pin,
+//        ]);
+
 
         Stream::whereIn("id",$request->stream)
             ->get()
@@ -56,6 +57,8 @@ class BusinessController extends Controller
             p9Stream::where([
                 "id" => $index
             ])->update([
+               "business_name" => $request->business_name[$index],
+               "pin" => $request->pin[$index],
                "amount" => $request->income[$index],
                "expense" => $request->expense[$index],
             ]);

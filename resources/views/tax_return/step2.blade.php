@@ -21,18 +21,16 @@
                 <!--end::Heading-->
                 <!--begin::Input group-->
                 <div class="mb-10 fv-row">
-                    <div class="form-check form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="1" id="billing1"
-                               name="year" data-kt-settings-notification="email"/>
-                        <label class="form-check-label ps-2" for="billing1"> Year</label>
-                    </div>
-                    </br>
-                    <div class="form-check form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="2" id="billing2"
-                               name="month" data-kt-settings-notification="phone"/>
-                        <label class="form-check-label ps-2" for="billing2">Monthly</label>
-                    </div>
 
+                    <label class="form-label mb-3" for="year">Select year</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <select name="year" class="form-control" id="year">
+                        @forelse(range(2022,2025) as $year)
+                            <option @if($p9->year == $year) selected @endif value="{{$year}}">{{$year}}</option>
+                        @empty
+                        @endforelse
+                    </select>
 
                 </div>
                 <!--end::Input group-->
@@ -43,7 +41,7 @@
                     <!--end::Label-->
                     <!--begin::Input-->
                     <input type="text" class="form-control form-control-lg form-control-solid"
-                           name="organisation_name" placeholder="" value=""/>
+                           name="name" required placeholder="" value="{{$p9->name}}"/>
                     <!--end::Input-->
                 </div>
                 <div class="mb-10 fv-row">
@@ -51,8 +49,8 @@
                     <label class="form-label mb-3">Personal KRA PIN</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid"
-                           name="kra_pin" placeholder="" value=""/>
+                    <input type="text" required class="form-control form-control-lg form-control-solid"
+                           name="kra_pin" placeholder="" value="{{$p9->kra_pin}}"/>
                     <!--end::Input-->
                 </div>
                 <div class="mb-10 fv-row">
@@ -60,8 +58,8 @@
                     <label class="form-label mb-3">Basic Salary</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="number" class="form-control form-control-lg form-control-solid"
-                           name="basic_salary" placeholder="" value=""/>
+                    <input required type="number" class="form-control form-control-lg form-control-solid"
+                           name="basic_salary" placeholder="" value="{{$p9->basic_salary}}"/>
                     <!--end::Input-->
                 </div>
 
@@ -75,7 +73,7 @@
         </div>
         <div class="d-flex flex-stack pt-15">
             <div class="mr-2">
-                <button type="button" class="btn btn-lg btn-light-primary me-3">
+                <a href="{{route("generate_p9_step_1",['code' => request()->code])}}" type="button" class="btn btn-lg btn-light-primary me-3">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
                     <span class="svg-icon svg-icon-4 me-1">
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -88,7 +86,7 @@
 											</svg>
 										</span>
                     <!--end::Svg Icon-->Previous
-                </button>
+                </a>
             </div>
 
             <div>

@@ -309,7 +309,7 @@
                                         <!--end::Checkbox-->
                                         <!--begin::Customer=-->
                                         <td>
-                                            <a href="../customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{$payment -> organisation_name}}</a>
+                                            <a href="../customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{$payment -> organisation_name?? implode(", ",$payment->streams()->pluck("business_name")->toArray())}}</a>
                                         </td>
                                         <!--end::Customer=-->
                                         <!--begin::Status=-->

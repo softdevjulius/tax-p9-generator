@@ -4,6 +4,7 @@
 
     <form action="{{route("generate_p9_step_1")}}" method="post">
         @csrf
+        <input type="hidden" name="code" value="{{request()->code}}">
         <div class="current" data-kt-stepper-element="content">
             <!--begin::Wrapper-->
             <div class="w-100">
@@ -29,7 +30,7 @@
                         <!--begin::Col-->
                         <div class="col-lg-6">
                             <!--begin::Option-->
-                            <input type="radio" class="btn-check" name="account_type" value="personal"
+                            <input type="radio" class="btn-check" name="account_type" value="individual"
                                    checked="checked" id="kt_create_account_form_account_type_personal"/>
                             <label
                                 class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10"
@@ -61,7 +62,7 @@
                         <!--begin::Col-->
                         <div class="col-lg-6">
                             <!--begin::Option-->
-                            <input type="radio" class="btn-check" name="account_type" value="corporate"
+                            <input disabled type="radio" class="btn-check" name="account_type" value="corporate"
                                    id="kt_create_account_form_account_type_corporate"/>
                             <label
                                 class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center"

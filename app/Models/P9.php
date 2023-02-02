@@ -10,6 +10,11 @@ class P9 extends Model
 {
     use HasFactory;
 
+    const ACCOUNT_TYPES = [
+        "CORPORATE" => "corporate",
+        "INDIVIDUAL" => "individual"
+    ];
+
     public static function generateUniqueCode()
     {
         $largest_base = 30;
