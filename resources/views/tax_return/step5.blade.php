@@ -70,7 +70,7 @@
 
         <div class="d-flex flex-stack pt-15">
             <div class="mr-2">
-                <button type="button" class="btn btn-lg btn-light-primary me-3">
+                <a href="{{route('generate_p9_step_4',['code'=>request()->code])}}" type="button" class="btn btn-lg btn-light-primary me-3">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
                     <span class="svg-icon svg-icon-4 me-1">
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -83,7 +83,7 @@
 											</svg>
 										</span>
                     <!--end::Svg Icon-->Previous
-                </button>
+                </a>
             </div>
 
         </div>

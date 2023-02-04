@@ -14,7 +14,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 <!--begin::Head-->
 <head>
-    <title>{{config("app.name")}} | @yield("title","Generate P9")</title>
+{{--    <title>{{config("app.name")}} | @yield("title","Generate P9")</title>--}}
     <meta charset="utf-8"/>
     <meta name="description"
           content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask & Laravel versions. Grab your copy now and get life-time updates for free."/>
@@ -46,6 +46,11 @@ License: For each use you must have a valid license purchased only from above li
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-5FS8GGP');</script>
     <!--End::Google Tag Manager -->
+    <style>
+        .fa-check{
+            color: #2137b9 !important; zoom: 2;
+        }
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -104,8 +109,10 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
-                                    <i class="stepper-check fas fa-check"></i>
-                                    <span class="stepper-number">1</span>
+                                    <i class="{{$segment2=="step-1"?"stepper-check":""}} fas fa-check"></i>
+                                    @if($segment2=="step-1")
+                                        <span class="stepper-number">1</span>
+                                    @endif
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Label-->
@@ -127,8 +134,10 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
-                                    <i class="stepper-check fas fa-check"></i>
-                                    <span class="stepper-number">2</span>
+                                    <i class="{{str_replace("step-","",$segment2)<=2?"stepper-check":""}} fas fa-check"></i>
+                                    @if(str_replace("step-","",$segment2)<=2)
+                                        <span class="stepper-number">{{2}}</span>
+                                    @endif
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Label-->
@@ -149,10 +158,13 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper">
                                 <!--begin::Icon-->
-                                <div class="stepper-icon">
-                                    <i class="stepper-check fas fa-check"></i>
-                                    <span class="stepper-number">3</span>
+                                <div class="stepper-icon rounded-3">
+                                    <i class="{{str_replace("step-","",$segment2)<=3?"stepper-check":""}} fas fa-check"></i>
+                                    @if(str_replace("step-","",$segment2)<=3)
+                                        <span class="stepper-number">3</span>
+                                    @endif
                                 </div>
+
                                 <!--end::Icon-->
                                 <!--begin::Label-->
                                 <div class="stepper-label">
@@ -172,9 +184,11 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper">
                                 <!--begin::Icon-->
-                                <div class="stepper-icon">
-                                    <i class="stepper-check fas fa-check"></i>
-                                    <span class="stepper-number">4</span>
+                                <div class="stepper-icon rounded-3">
+                                    <i class="{{str_replace("step-","",$segment2)<=4?"stepper-check":""}} fas fa-check"></i>
+                                    @if(str_replace("step-","",$segment2)<=4)
+                                        <span class="stepper-number">4</span>
+                                    @endif
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Label-->
@@ -195,9 +209,11 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper">
                                 <!--begin::Icon-->
-                                <div class="stepper-icon">
-                                    <i class="stepper-check fas fa-check"></i>
-                                    <span class="stepper-number">5</span>
+                                <div class="stepper-icon rounded-3">
+                                    <i class="{{str_replace("step-","",$segment2)<=5?"stepper-check":""}} fas fa-check"></i>
+                                    @if(str_replace("step-","",$segment2)<=5)
+                                        <span class="stepper-number">5</span>
+                                    @endif
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Label-->
@@ -229,15 +245,18 @@ License: For each use you must have a valid license purchased only from above li
         </div>
         <!--begin::Aside-->
         <!--begin::Body-->
-        <div class="d-flex flex-column flex-lg-row-fluid py-10">
+        <div class="d-flex flex-column flex-lg-row-fluid">
+
             <!--begin::Content-->
-            <div class="d-flex flex-center flex-column flex-column-fluid">
+            <div class="{{--d-flex--}} pt-20 px-10 flex-center flex-column flex-column-fluid">
+
+                @yield("content")
                 <!--begin::Wrapper-->
-                <div class="w-lg-650px w-xl-700px p-10 p-lg-15 mx-auto">
-                    <!--begin::Form-->
-                    @yield("content")
-                    <!--end::Form-->
-                </div>
+{{--                <div class="w-lg-650px w-xl-700px p-10 p-lg-15 mx-auto">--}}
+{{--                    <!--begin::Form-->--}}
+{{--                    --}}
+{{--                    <!--end::Form-->--}}
+{{--                </div>--}}
                 <!--end::Wrapper-->
             </div>
             <!--end::Content-->

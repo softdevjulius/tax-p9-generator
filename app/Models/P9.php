@@ -43,6 +43,11 @@ class P9 extends Model
         return $this->hasMany(p9Stream::class);
     }
 
+    public function incomes()
+    {
+        return $this->hasMany(P9Income::class);
+    }
+
     public static function boot()
     {
         parent::boot();
