@@ -10,7 +10,7 @@
     </style>
     <div class="row">
 
-        <table class="tax_calculation_table">
+        <table class="tax_calculation_table" style="width: 100% !important;">
             <tr>
                 <th colspan="2"><h2>Calculation</h2></th>
             </tr>
