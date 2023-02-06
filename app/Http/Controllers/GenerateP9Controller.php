@@ -67,25 +67,29 @@ class GenerateP9Controller extends Controller
 
         $p9 = P9::whereCode($request->code)->firstOrFail();
 
-        foreach ($request->allowance_name as $index => $allowance) {
-            if(empty($request->allowance_amount[$index]))
-                continue;
-
-            $p9->allowances()->create([
-                "name" => $request->allowance_name[$index],
-                "amount" => $request->allowance_amount[$index],
-            ]);
-        }
-
-        foreach ($request->deduction_name as $index => $allowance) {
-            if(empty($request->deduction_amount[$index]))
-                continue;
-
-            $p9->deductions()->create([
-                "name" => $request->deduction_name[$index],
-                "amount" => $request->deduction_amount[$index],
-            ]);
-        }
+//        if (sizeof($request->allowance_name)>0){
+//            foreach ($request->allowance_name as $index => $allowance) {
+//            if(empty($request->allowance_amount[$index]))
+//                continue;
+//
+//            $p9->allowances()->create([
+//                "name" => $request->allowance_name[$index],
+//                "amount" => $request->allowance_amount[$index],
+//            ]);
+//        }
+//        }
+//
+//        if (sizeof($request->allowance_name)>0){
+//            foreach ($request->deduction_name as $index => $allowance) {
+//            if(empty($request->deduction_amount[$index]))
+//                continue;
+//
+//            $p9->deductions()->create([
+//                "name" => $request->deduction_name[$index],
+//                "amount" => $request->deduction_amount[$index],
+//            ]);
+//        }
+//        }
 
         return redirect()->route("generate_p9_step_4", ["code" => $request->code])->with([
             "success" => 1,
