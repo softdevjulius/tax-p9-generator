@@ -65,7 +65,7 @@ class GenerateP9Controller extends Controller
 
         if ($request->isMethod("GET")) return view("tax_return.step3");
 
-        $p9 = P9::whereCode($request->code)->firstOrFail();
+//        $p9 = P9::whereCode($request->code)->firstOrFail();
 
 //        if (sizeof($request->allowance_name)>0){
 //            foreach ($request->allowance_name as $index => $allowance) {
@@ -145,7 +145,8 @@ class GenerateP9Controller extends Controller
                 "total_taxable_other_income",
                 "total_withholding_tax",
                 "total_individual_income_tax",
-                "full_width"
+                "full_width",
+            "p9"
             ));
             return $pdf->download("p.pdf");
         } else {
@@ -222,13 +223,19 @@ class GenerateP9Controller extends Controller
                 "total_taxable_other_income",
                 "total_withholding_tax",
                 "total_individual_income_tax",
+                "p9"
 
             ));
         }
 
         parse_str($request->data,$data);
 
-        //delete deductions and allowances..and incomces
+        $p9->update([
+            "should_pay_nhif" => boolval($data['should_pay_nhif'] ?? false),
+            "should_pay_nssf" => boolval($data['should_pay_nssf'] ?? false),
+        ]);
+
+        //delete deductions and allowances and incomces
         $p9 -> allowances() -> delete();
         $p9 -> deductions() -> delete();
         $p9 -> incomes() -> delete();
@@ -275,5 +282,62 @@ class GenerateP9Controller extends Controller
             $index+=1;
         }
 
+        $nhif = $p9->should_pay_nhif ? $this->calculateNhif($p9->basic_salary): 0;
+        $nssf = $p9->should_pay_nssf ? array_sum($this->calculateNssf($p9->basic_salary)): 0;
+
+        $p9->update(compact("nhif","nssf"));
+    }
+
+    private function calculateNhif($grossSalary)
+    {
+        if($grossSalary<=5999){
+            return 150;
+        }elseif ($grossSalary<=7999){
+            return 300;
+        }elseif ($grossSalary<=11999){
+            return 400;
+        }elseif ($grossSalary<=14999){
+            return 500;
+        }elseif ($grossSalary<=19999){
+            return 600;
+        }elseif ($grossSalary<=24999){
+            return 750;
+        }elseif ($grossSalary<=29999){
+            return 850;
+        }elseif ($grossSalary<=34999){
+            return 900;
+        }elseif ($grossSalary<=39999){
+            return 950;
+        }elseif ($grossSalary<=44999){
+            return 1000;
+        }elseif ($grossSalary<=49999){
+            return 1100;
+        }elseif ($grossSalary<=59999){
+            return 1200;
+        }elseif ($grossSalary<=69999){
+            return 1300;
+        }elseif ($grossSalary<=79999){
+            return 1400;
+        }elseif ($grossSalary<=89999){
+            return 1500;
+        }elseif ($grossSalary<=99999){
+            return 1600;
+        }
+        return 1700;
+    }
+
+    private function calculateNssf($grossSalary):array
+    {
+        if ($grossSalary<3000)
+            return [0,0];
+
+        $t1 = $t2 = 0;
+
+        $t1 = min($grossSalary * 6 / 100,360);
+
+        if ($grossSalary > 6000)
+            $t2 = min(($grossSalary-6000)*6/100,720);
+
+        return [$t1,$t2];
     }
 }

@@ -2,7 +2,7 @@
     <style>
 
         td{
-            padding-bottom: 40px !important;
+            padding: 7px !important;
         }
         table, th, td {
             border: 1px solid #f0f0f4;
@@ -25,8 +25,20 @@
                 <td>Basic Income:</td>
                 <td>{{number_format($basic_income,2)}}</td>
             </tr>
+            @if($p9->should_pay_nhif)
+                <tr>
+                    <td>NHIF:</td>
+                    <td>{{number_format($p9->nhif,2)}}</td>
+                </tr>
+            @endif
+            @if($p9->should_pay_nssf)
+                <tr>
+                    <td>NSSF:</td>
+                    <td>{{number_format($p9->nssf,2)}}</td>
+                </tr>
+            @endif
             <tr>
-                <td>Allowances:</td>
+                <td>Non-Cash Benefits:</td>
                 <td>{{number_format($allowances,2)}}</td>
             </tr>
             <tr>
@@ -34,7 +46,7 @@
                 <td>{{number_format($deductions,2)}}</td>
             </tr>
             <tr>
-                <td>Gross Salary/Taxable Income:</td>
+                <td>Taxable Income:</td>
                 <td>{{number_format($taxable_income,2)}}</td>
             </tr>
             <tr>

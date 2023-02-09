@@ -26,8 +26,13 @@ return new class extends Migration
             $table->string("phone")->nullable();
             $table->string("mpesa_phone")->nullable();
             $table->string("email")->nullable();
-            $table->decimal("amount",20)->nullable();
-            $table->decimal("tax",20)->nullable();
+            $table->decimal("amount",20)->default(0);
+            $table->decimal("tax",20)->default(0);
+            $table->decimal("nssf",20)->default(0);
+            $table->boolean("should_pay_nssf")->default(true);
+            $table->decimal("nhif",20)->default(0);
+            $table->boolean("should_pay_nhif")->default(true);
+
             $table->timestamps();
         });
     }

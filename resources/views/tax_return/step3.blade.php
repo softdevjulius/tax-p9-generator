@@ -11,24 +11,34 @@
                 <!--begin::Wrapper-->
                 <div class="w-100">
                     <!--begin::Heading-->
-                    <div class="w-100">
-                        <!--begin::Title-->
-                        <h2 class="fw-bold text-dark">Other Incomes and Deductions</h2>
 
-                        <a href="javascript:void(0);" class="btn btn-link add_other_income_deductions" style="text-decoration: underline; color: #1b459b"><i class="fa fa-plus" style="color: #1b459b"></i>Add Other Income</a>
-
-                        <div class="other_incomes">
-
-                        </div>
-                        <br>
-
-                    </div>
                     <!--end::Heading-->
                     <!--begin::Input group-->
 
+
+
+                    <div class="row">
+                        <div class="full">
+                            <h3>Statutory Deductions:</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="w-25">
+                            <label for="nhif">NHIF</label>
+                            <input id="nhif" type="checkbox" name="should_pay_nhif" checked>
+                        </div>
+                        <div class="w-25">
+                            <label for="nssf">NSSF</label>
+                            <input id="nssf" type="checkbox" name="should_pay_nssf" checked>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
                     <div class="row">
                         <div class="w-75">
-                            <h3>Allowances: </h3>
+                            <h3>Non-Cash Benefits: </h3>
                         </div>
                         <div class="w-25">
                             <button type="button" class="btn btn-sm btn-primary btn-circle add_allowance"><i class="fa fa-plus fa-3x"></i></button>
@@ -68,16 +78,34 @@
                     </div>
 
                     <br>
+                    <div class="clearfix"></div>
+
+
 
                     <div class="row">
                         <div class="w-75">
-                            <h3>Deductions:</h3>
+                            <h3>Other Allowable Deductions:</h3>
                         </div>
                         <div class="w-25">
                             <button type="button" class="btn btn-sm btn-primary btn-circle add_deduction"><i class="fa fa-plus fa-3x"></i></button>
                         </div>
                     </div>
                     <div class="deductions">
+                    </div>
+                    <br>
+
+
+                    <div class="w-100">
+                        <!--begin::Title-->
+                        <h2 class="fw-bold text-dark">Other Incomes and Deductions</h2>
+
+                        <a href="javascript:void(0);" class="btn btn-link add_other_income_deductions" style="text-decoration: underline; color: #1b459b"><i class="fa fa-plus" style="color: #1b459b"></i>Add Other Income</a>
+
+                        <div class="other_incomes">
+
+                        </div>
+                        <br>
+
                     </div>
 
 
@@ -289,7 +317,7 @@
                        <div class="col">
                            <div class="fv-row mb-10">
                                <!--begin::Label-->
-                               <label class="form-label "> Allowances Name </label>
+                               <label class="form-label "> Name </label>
                                <!--end::Label-->
                                <!--begin::Input-->
                                <input name="allowance_name[]" class="form-control form-control-lg form-control-solid"
@@ -301,7 +329,7 @@
                        <div class="col">
                            <div class="fv-row mb-10">
                                <!--begin::Label-->
-                               <label class="form-label "> Allowances Amount </label>
+                               <label class="form-label ">  Amount </label>
                                <!--end::Label-->
                                <!--begin::Input-->
                                <input type="number" step="0.01" name="allowance_amount[]" class="taxable form-control form-control-lg form-control-solid"
@@ -322,7 +350,7 @@
                         <div class="col">
                             <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label "> Deduction Name </label>
+                                <label class="form-label "> Name </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input name="deduction_name[]" class="form-control form-control-lg form-control-solid"
@@ -334,7 +362,7 @@
                         <div class="col">
                             <div class="fv-row mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label "> Deduction Amount </label>
+                                <label class="form-label "> Amount </label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="number" step="0.01" name="deduction_amount[]" class="taxable form-control form-control-lg form-control-solid"
@@ -353,6 +381,9 @@
 
             $("#billing2").prop("checked",true);
 
+            $("#nhif, #nssf").on("change",function(){
+                update_tax_records()
+            })
             $("#billing1, #billing2").on("change",function(){
                 // alert($(this).val())
 
