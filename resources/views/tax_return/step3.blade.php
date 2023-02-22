@@ -193,12 +193,35 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col col-4">
+            <button type="button" id="export_file" style="float: right !important;" class="btn btn-primary">Export xls</button>
+        </div>
+    </div>
+
 @stop
 
 
 @section("js")
+    <script src="{{asset("js/file_saver.js")}}"></script>
+    <script src="{{asset("js/export_xlsx.js")}}"></script>
+    <script src="{{asset("js/table_export.js")}}"></script>
     <script>
         $(function (){
+
+            const export_file = function (){
+                // var exportType = 'csv';
+                $('table').tableExport({type:'csv'});
+                // $('#dataTable').tableExport({
+                //     type : exportType,
+                //     escape : 'false',
+                //     ignoreColumn: []
+                // });
+            }
+
+            $("#export_file").on("click",function (){
+                export_file()
+            })
 
             const update_tax_records = () =>{
                 const data = $("#tax_record_form").serialize()

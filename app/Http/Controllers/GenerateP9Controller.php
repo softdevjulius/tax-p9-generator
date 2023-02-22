@@ -116,9 +116,31 @@ class GenerateP9Controller extends Controller
 
     public function step5(Request $request)
     {
-        if ($request->isMethod("GET")) return view("tax_return.step5");
-
         $p9 = P9::whereCode($request->code)->firstOrFail();
+
+        if ($request->isMethod("GET")) {
+            $amount = $p9->basic_salary;
+            $allowances = $p9->allowances()->sum("amount");
+            $deductions = $p9->deductions()->sum("amount");
+
+            $nssf = array_sum($this->calculateNssf($amount));
+            $taxable_income = (new TaxHandler($p9))->taxableIncome();
+            $total_tax = (new TaxHandler($p9))->totalTax();
+            $personal_relief = (new TaxHandler($p9))->taxRelief();
+            $tax = $total_tax - $personal_relief;
+
+            $name = $p9->name;
+            $pin = $p9->kra_pin;
+
+            return view("tax_return.step5",[
+                "table" => view("tax_return.p9_export_table",compact(
+                    "amount","allowances","deductions","nssf","taxable_income","total_tax",
+                    "personal_relief","tax","name","pin"
+                ))->render()
+            ]);
+        }
+
+
 
         $tax = .3 * ($p9->basic_salary + $p9->allowances()->sum("amount") - $p9->deductions()->sum("amount"));
 
@@ -288,7 +310,7 @@ class GenerateP9Controller extends Controller
         $p9->update(compact("nhif","nssf"));
     }
 
-    private function calculateNhif($grossSalary)
+    public function calculateNhif($grossSalary)
     {
         if($grossSalary<=5999){
             return 150;
@@ -326,7 +348,7 @@ class GenerateP9Controller extends Controller
         return 1700;
     }
 
-    private function calculateNssf($grossSalary):array
+    public function calculateNssf($grossSalary):array
     {
         if ($grossSalary<3000)
             return [0,0];

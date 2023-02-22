@@ -36,6 +36,18 @@
                     <button name="submit_action" type="submit" value="download_pdf" class="btn btn-lg btn-primary">
                         <span class="indicator-label" class="bi-cloud-download">Download PDF</span>
                     </button>
+
+
+
+{{--                    <div class="row">--}}
+{{--                        <div class="col col-4">--}}
+{{--                            <button type="button" id="export_file" style="float: right !important;" class="btn btn-primary">Export xls</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <!--begin::Label-->
+                    <button id="export_file" type="button" value="download_pdf" class="btn btn-lg btn-primary">
+                        <span class="indicator-label" class="bi-cloud-download">Export Excel</span>
+                    </button>
                     <!--begin::Label-->
                     <button name="submit_action" type="submit" value="send_to_email" class="btn btn-lg btn-success">
                         <span class="indicator-label" class="bi-cloud-download">Send to email</span>
@@ -90,13 +102,33 @@
 
     </form>
 
+
+    <div class="table_export" style="display: none !important;">
+        {!! $table !!}
+    </div>
+
 @stop
 
 
 @section("js")
+    <script src="{{asset("js/file_saver.js")}}"></script>
+    <script src="{{asset("js/export_xlsx.js")}}"></script>
+    <script src="{{asset("js/table_export.js")}}"></script>
     <script>
         $(function (){
+            const export_file = function (){
+                // var exportType = 'csv';
+                $('table').tableExport({type:'csv'});
+                // $('#dataTable').tableExport({
+                //     type : exportType,
+                //     escape : 'false',
+                //     ignoreColumn: []
+                // });
+            }
 
+            $("#export_file").on("click",function (){
+                export_file()
+            })
             $("#billing2").prop("checked",true);
 
             $("#billing1, #billing2").on("change",function(){
