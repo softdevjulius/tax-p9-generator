@@ -86,10 +86,7 @@
                                                         style="padding:0;color:rgb(1, 47, 107);"> TAX RETURNS </span></span></a>
                                         </li>
 
-                                        <li>
-                                            <a href="{{route("login")}}"><span><span
-                                                        style="padding:0;color:rgb(1, 47, 107);"> Login </span></span></a>
-                                        </li>
+                                        
                                     </ul>
                                 </nav>
                                 <a class="responsive-menu-toggle" href="i#"><i class="icon-menu-fine"></i></a>
@@ -193,7 +190,7 @@
             </div>
         </header>
     </div>
-    <div id="Content">
+    <!-- <div id="Content">
         <div class="content_wrapper clearfix">
             <div class="sections_group">
                 <div class="entry-content">
@@ -303,7 +300,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <footer id="Footer" class="clearfix">
         <div class="widgets_wrapper" style="padding:70px 0;">
             <div class="container">
