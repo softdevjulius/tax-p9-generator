@@ -38,8 +38,9 @@
                     <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
                     <!--end::Label-->
                     <!--begin::Input wrapper-->
-                    <input type="number" required class="form-control form-control-solid" placeholder=""
-                           name="amount" value="100"/>
+                    <input type="number" required class="form-control form-control-solid disabled" placeholder=""
+                           name="amount" readonly disabled value="1"/>
+                    <input type="hidden" name="amount" value="1">
                     <!--end::Input wrapper-->
                 </div>
                 <!--end::Input group-->
@@ -92,7 +93,7 @@
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
                 <button type="submit" class="btn btn-lg btn-primary">
-                    Continue
+                    Make Payment
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                     <span class="svg-icon svg-icon-4 ms-1">
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"

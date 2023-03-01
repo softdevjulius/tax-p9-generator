@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/",function (){
 
+    $p9 = \App\Models\P9::first();
+
+    trigger_mpesa_stk_push($p9->mpesa_phone??$p9->phone,$p9->amount,$p9->code);
+
+
+
     $fileName = 'patients_template.csv';
 
 

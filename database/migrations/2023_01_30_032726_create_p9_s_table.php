@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string("duration")->nullable();
             $table->string("phone")->nullable();
             $table->string("mpesa_phone")->nullable();
+            $table->string("transaction_code")->nullable();
+            $table->decimal("amount_paid",20)->nullable();
             $table->string("email")->nullable();
             $table->decimal("amount",20)->default(0);
             $table->decimal("tax",20)->default(0);

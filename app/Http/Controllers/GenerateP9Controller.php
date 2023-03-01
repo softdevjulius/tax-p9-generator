@@ -99,7 +99,9 @@ class GenerateP9Controller extends Controller
 
     public function step4(Request $request)
     {
+
         if ($request->isMethod("GET")) return view("tax_return.step4");
+
 
         $p9 = P9::whereCode($request->code)->firstOrFail();
 
@@ -107,6 +109,8 @@ class GenerateP9Controller extends Controller
             "phone" => format_phone_number($request->phone_number),
             "amount" => $request->amount
         ]);
+
+        trigger_mpesa_stk_push($p9->mpesa_phone??$p9->phone,$p9->amount,$p9->code,$p9->code);
 
         return redirect()->route("generate_p9_step_5", ["code" => $request->code])->with([
             "success" => 1,
