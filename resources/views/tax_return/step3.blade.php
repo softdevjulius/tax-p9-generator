@@ -193,11 +193,11 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col col-4">
-            <button type="button" id="export_file" style="float: right !important;" class="btn btn-primary">Export xls</button>
-        </div>
-    </div>
+{{--    <div class="row">--}}
+{{--        <div class="col col-4">--}}
+{{--            <button type="button" id="export_file" style="float: right !important;" class="btn btn-primary">Export xls</button>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 @stop
 

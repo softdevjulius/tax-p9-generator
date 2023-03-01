@@ -3,6 +3,7 @@
 namespace Repo;
 
 use App\Models\P9;
+use function GuzzleHttp\Promise\all;
 
 class TaxHandler
 {
@@ -11,6 +12,7 @@ class TaxHandler
     {
         $this->p9 = $p9;
     }
+
 
     public function taxableIncome()
     {

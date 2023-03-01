@@ -42,7 +42,7 @@ class StkCallbackUrlController extends Controller
 
             $p9 -> update([
                 "transaction_code" => $transaction_code,
-                "amount" => $amount,
+                "amount_paid" => $amount,
                 "mpesa_phone" => $phone_number,
             ]);
 

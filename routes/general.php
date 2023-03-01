@@ -16,6 +16,7 @@ Route::group(['prefix' => "generate-p9"],function (){
     Route::match(['GET',"POST"],'step-4',[GenerateP9Controller::class,'step4'])->name("generate_p9_step_4");
     Route::match(['GET',"POST"],'step-5',[GenerateP9Controller::class,'step5'])->name("generate_p9_step_5");
     Route::match(['GET',"POST"],'tax-preview',[GenerateP9Controller::class,'taxPreview'])->name("generate_p9_tax_preview");
+    Route::match(['PUT',"POST"],"customize-basic-salary",[GenerateP9Controller::class,'customizeBasicSalary'])->name("generate_p9_customize_basic_salary");
 
 });
 

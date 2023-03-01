@@ -15,6 +15,11 @@ class P9 extends Model
         "INDIVIDUAL" => "individual"
     ];
 
+    public function monthSalaries()
+    {
+        return $this->hasMany(P9MonthBasicSalary::class,"");
+    }
+
     public static function generateUniqueCode()
     {
         $largest_base = 30;

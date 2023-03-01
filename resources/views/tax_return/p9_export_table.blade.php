@@ -1,4 +1,4 @@
-@php use App\Http\Controllers\GenerateP9Controller; @endphp
+@php use App\Http\Controllers\GenerateP9Controller;use Repo\TaxHandler; @endphp
 <table style="width: 100% !important;">
     <tbody>
     <tr>
@@ -13,13 +13,13 @@
     <tr>
         <th colspan="5" style="text-align: center !important;">TAX DEDUCTION CARD YEAR {{now()->format("Y")}}</th>
     </tr>
-{{--    <tr>--}}
-{{--        <td colspan="2">Employer's Name</td>--}}
-{{--        <td colspan="4">GATUNDU NORTH CONSTITUENCY</td>--}}
+    {{--    <tr>--}}
+    {{--        <td colspan="2">Employer's Name</td>--}}
+    {{--        <td colspan="4">GATUNDU NORTH CONSTITUENCY</td>--}}
 
-{{--        <td colspan="2">Employer's PIN</td>--}}
-{{--        <td colspan="4">P051340491Z</td>--}}
-{{--    </tr>--}}
+    {{--        <td colspan="2">Employer's PIN</td>--}}
+    {{--        <td colspan="4">P051340491Z</td>--}}
+    {{--    </tr>--}}
     <tr>
         <td colspan="2">Employee’s Name</td>
         <td colspan="4">{{$name}}</td>
@@ -55,22 +55,22 @@
         <td></td>
         <td>Total Kshs.</td>
     </tr>
-    @forelse(range(1,12) as $month_id)
+    @forelse($p9->monthSalaries as $salaries)
         <tr>
-            <td>{{\Repo\MonthHelper::getMonthName($month_id)}}</td>
-            <td>{{number_format($amount,2)}}</td>
-            <td>{{number_format($allowances,2)}}</td>
-            <td>{{number_format($deductions,2)}}</td>
-            <td>{{number_format($amount,2)}}</td>
-            <td>{{number_format(.3*$amount,2)}}</td>
-            <td>{{number_format($nssf,2)}}</td>
+            <td>{{$salaries->month_name}}</td>
+            <td>{{number_format($salaries->amount,2)}}</td>
+            <td>{{number_format($salaries->allowance,2)}}</td>
+            <td>{{number_format($salaries->deduction,2)}}</td>
+            <td>{{number_format($amount = array_sum([$salaries->amount,$salaries->allowance,$salaries->deduction]),2)}}</td>
+            <td>{{number_format($nssf = .3*$amount,2)}}</td>
+            <td>{{number_format((new GenerateP9Controller())->calculateNhif($amount),2)}}</td>
             <td>{{number_format(20000,2)}}</td>
             <td></td>
-            <td>{{number_format($nssf,2)}}</td>
-            <td>{{number_format($taxable_income,2)}}</td>
-            <td>{{number_format($total_tax,2)}}</td>
-            <td>{{number_format($personal_relief,2)}}</td>
-            <td>{{number_format($tax,2)}}</td>
+            <td>{{number_format(array_sum((new GenerateP9Controller())->calculateNssf($amount)),2)}}</td>
+            <td>{{number_format($taxable_amount =(new GenerateP9Controller())->calculateTaxableIncome($amount,$salaries->deduction,$salaries->allowance,$nssf,$p9->should_pay_nssf),2)}}</td>
+            <td>{{number_format($tax = (new TaxHandler($p9))->calculateTaxAmount($taxable_amount),2)}}</td>
+            <td>{{number_format($personal_relief = (new TaxHandler($p9))->taxRelief(),2)}}</td>
+            <td>{{number_format($tax - $personal_relief,2)}}</td>
         </tr>
 
     @empty
@@ -92,7 +92,7 @@
         <th>{{number_format($tax*12,2)}}</th>
     </tr>
     <tr>
-        <td colspan="4">TOTAL CHARGEABLE PAY (COL. H)   Kshs</td>
+        <td colspan="4">TOTAL CHARGEABLE PAY (COL. H) Kshs</td>
         <th>{{number_format($taxable_income*12,2)}}</th>
         <td colspan="5"></td>
         <td colspan="3">TOTAL TAX (COL. L) Kshs</td>
@@ -108,17 +108,23 @@
         <td colspan="14">&nbsp;</td>
     </tr>
     <tr>
-        <td colspan="5">1.  Use P9A     (a) For all liable employees and where director/employee received Benefits in addition to cash emoluments.</td>
+        <td colspan="5">1. Use P9A (a) For all liable employees and where director/employee received Benefits in
+            addition to cash emoluments.
+        </td>
         <td colspan="4"></td>
-        <td colspan="5">(b)  Attach   (i) Photostat copy of interest certificate and statement of account from the Financial Institution.</td>
+        <td colspan="5">(b) Attach (i) Photostat copy of interest certificate and statement of account from the
+            Financial Institution.
+        </td>
     </tr>
     <tr>
-        <td colspan="5">(b)  Where an employee is eligible to deduction on owner occupier interest.</td>
+        <td colspan="5">(b) Where an employee is eligible to deduction on owner occupier interest.</td>
         <td colspan="4"></td>
         <td colspan="5">(ii) The DECLARATION duly signed by the employee.</td>
     </tr>
     <tr>
-        <td colspan="5">2.  (a)  Allowable  interest in respect of any month must not exceed Kshs. 12,500/= or Kshs. 150,000 per year.</td>
+        <td colspan="5">2. (a) Allowable interest in respect of any month must not exceed Kshs. 12,500/= or Kshs.
+            150,000 per year.
+        </td>
         <td colspan="4"></td>
         <th colspan="5">NAMES OF FINANCIAL INSTITUTION ADVANCING MORTGAGE LOAN</th>
     </tr>
@@ -130,7 +136,7 @@
     <tr>
         <th colspan="5"></th>
         <td colspan="4"></td>
-        <td colspan="5">L R NO. OF OWNER OCCUPIED PROPERTY: </td>
+        <td colspan="5">L R NO. OF OWNER OCCUPIED PROPERTY:</td>
     </tr>
     <tr>
         <th colspan="5"></th>

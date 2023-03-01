@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\P9;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Repo\TaxHandler;
 use function GuzzleHttp\Promise\all;
@@ -51,7 +52,8 @@ class GenerateP9Controller extends Controller
 
         $p9->update($request->only(["name", "kra_pin", "basic_salary", "year",]));
 
-        return redirect()->route("generate_p9_step_3", ['code' => $request->code])
+        //skip step3
+        return redirect()->route("generate_p9_step_4", ['code' => $request->code])
             ->with([
                 "success" => 1,
                 "msg" => "Success",
@@ -118,6 +120,11 @@ class GenerateP9Controller extends Controller
         ]);
     }
 
+    public function calculateTaxableIncome($amount,$deduction,$allowance,$nssf,$should_pay_nssf)
+    {
+        return $amount - ($deduction + ($should_pay_nssf?$nssf:0) + $allowance);
+    }
+
     public function step5(Request $request)
     {
         $p9 = P9::whereCode($request->code)->firstOrFail();
@@ -138,6 +145,7 @@ class GenerateP9Controller extends Controller
 
             return view("tax_return.step5",[
                 "table" => view("tax_return.p9_export_table",compact(
+                    "p9",
                     "amount","allowances","deductions","nssf","taxable_income","total_tax",
                     "personal_relief","tax","name","pin"
                 ))->render()
@@ -224,6 +232,48 @@ class GenerateP9Controller extends Controller
             "total_taxable_other_income",
             "total_individual_income_tax",
             "total_withholding_tax");
+    }
+
+    public function customizeBasicSalary(Request $request)
+    {
+        $p9 = P9::whereCode($request->code)->firstOrFail();
+
+
+        if ($request->isMethod("POST")){
+
+            foreach (range(0,11) as $item) {
+
+                $month_name = now()->copy()->startOfYear()->addMonths($item)->monthName;
+
+                $p9->monthSalaries()->updateorcreate([
+                    "month_name" => $month_name,
+                ]);
+
+            }
+
+            return view("tax_return.customize_basic_salary",[
+                "salaries" => $p9->monthSalaries
+            ]);
+        }
+
+        foreach ($request->basic_salary as $month=>$amount) {
+            $p9->monthSalaries()->updateorcreate([
+                "month_name" => $month
+            ],[
+                "amount" => $request->basic_salary[$month],
+                "allowance" => $request->allowance[$month],
+                "deduction" => $request->deduction[$month],
+            ]);
+        }
+        $p9 -> update([
+            "basic_salary" => $p9->monthSalaries()->sum("amount")
+        ]);
+
+        return back()->with([
+            "success" => 1,
+            "msg" => "Successfully customized basic salary",
+        ]);
+
     }
 
     public function taxPreview(Request $request)
