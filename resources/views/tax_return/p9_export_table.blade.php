@@ -55,6 +55,9 @@
         <td></td>
         <td>Total Kshs.</td>
     </tr>
+    @php
+        $_nssf = $_taxable_amount = $_personal_relief = $__tax = $_tax = $_nhif = 0;
+    @endphp
     @forelse($p9->monthSalaries as $salaries)
         <tr>
             <td>{{$salaries->month_name}}</td>
@@ -62,8 +65,8 @@
             <td>{{number_format($salaries->allowance,2)}}</td>
             <td>{{number_format($salaries->deduction,2)}}</td>
             <td>{{number_format($amount = array_sum([$salaries->amount,$salaries->allowance,$salaries->deduction]),2)}}</td>
-            <td>{{number_format($nssf = .3*$amount,2)}}</td>
-            <td>{{number_format((new GenerateP9Controller())->calculateNhif($amount),2)}}</td>
+            <td>{{number_format(($nssf = .3*$amount),2)}}</td>
+            <td>{{number_format($nhif = (new GenerateP9Controller())->calculateNhif($amount),2)}}</td>
             <td>{{number_format(20000,2)}}</td>
             <td></td>
             <td>{{number_format(array_sum((new GenerateP9Controller())->calculateNssf($amount)),2)}}</td>
@@ -73,30 +76,38 @@
             <td>{{number_format($tax - $personal_relief,2)}}</td>
         </tr>
 
+        @php
+        $_nssf += $nssf;
+        $_nhif += $nhif;
+        $_taxable_amount += $taxable_amount;
+        $_tax += $tax;
+        $_personal_relief += $personal_relief;
+        $__tax += ($tax - $personal_relief)
+        @endphp
     @empty
     @endforelse
     <tr>
         <th>Totals:</th>
-        <th>{{number_format($amount*12,2)}}</th>
-        <th>{{number_format($allowances*12,2)}}</th>
-        <th>{{number_format($deductions*12,2)}}</th>
-        <th>{{number_format($amount*12,2)}}</th>
+        <th>{{number_format($_amount = $p9->monthSalaries->sum("amount"),2)}}</th>
+        <th>{{number_format($_allowance = $p9->monthSalaries->sum("allowances")*12,2)}}</th>
+        <th>{{number_format($_deduction =$p9->monthSalaries->sum("deductions")*12,2)}}</th>
+        <th>{{number_format($amount = array_sum([$_amount,$_allowance,$_deduction]),2)}}</th>
         <th>{{number_format(.3*$amount*12,2)}}</th>
-        <th>{{number_format($nssf*12,2)}}</th>
+        <th>{{number_format($_nhif,2)}}</th>
         <th>{{number_format(20000*12,2)}}</th>
         <th>{{number_format(0*12,2)}}</th>
-        <th>{{number_format($nssf*12,2)}}</th>
-        <th>{{number_format($taxable_income*12,2)}}</th>
-        <th>{{number_format($total_tax*12,2)}}</th>
-        <th>{{number_format($personal_relief*12,2)}}</th>
-        <th>{{number_format($tax*12,2)}}</th>
+        <th>{{number_format($_nssf,2)}}</th>
+        <th>{{number_format($_taxable_amount,2)}}</th>
+        <th>{{number_format($_tax,2)}}</th>
+        <th>{{number_format($_personal_relief,2)}}</th>
+        <th>{{number_format($__tax,2)}}</th>
     </tr>
     <tr>
         <td colspan="4">TOTAL CHARGEABLE PAY (COL. H) Kshs</td>
-        <th>{{number_format($taxable_income*12,2)}}</th>
+        <th>{{number_format($_taxable_amount,2)}}</th>
         <td colspan="5"></td>
         <td colspan="3">TOTAL TAX (COL. L) Kshs</td>
-        <th>{{number_format($tax*12,2)}}</th>
+        <th>{{number_format($__tax,2)}}</th>
     </tr>
     <tr>
         <td colspan="14">&nbsp;</td>

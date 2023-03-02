@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\P9;
+use App\Models\User;
+use App\Notifications\SendP9Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Repo\TaxHandler;
@@ -415,5 +417,35 @@ class GenerateP9Controller extends Controller
             $t2 = min(($grossSalary-6000)*6/100,720);
 
         return [$t1,$t2];
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $p9 = P9::whereCode($request->code)->firstOrFail();
+
+        (new User())->forceFill([
+            "email" => $request->email,
+            "name" => "Client",
+        ])->notify(new SendP9Notification($p9));
+
+        return back()->with([
+            "success" => 1,
+            "msg" => "Successfully sent to email",
+        ]);
+    }
+
+    public function downloadP9($id)
+    {
+        $p9 = P9::whereCode($id)->firstOrFail();
+
+        $name = $p9->name;
+        $pin = $p9->pin;
+        $segment2 = "download";
+        return view("tax_return.download_p9",[
+            "table" => view("tax_return.p9_export_table",compact(
+                "p9","name","pin"))
+        ],compact("segment2"));
+
+
     }
 }
