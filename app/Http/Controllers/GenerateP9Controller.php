@@ -247,14 +247,19 @@ class GenerateP9Controller extends Controller
 
                 $month_name = now()->copy()->startOfYear()->addMonths($item)->monthName;
 
-                $p9->monthSalaries()->updateorcreate([
+                $month = $p9->monthSalaries()->updateorcreate([
                     "month_name" => $month_name,
                 ]);
+
+                if ($month->amount == 0)
+                    $month -> update([
+                        "amount" => round($request->amount / 12,2)
+                    ]);
 
             }
 
             return view("tax_return.customize_basic_salary",[
-                "salaries" => $p9->monthSalaries
+                "salaries" => $p9->monthSalaries,
             ]);
         }
 
@@ -423,10 +428,12 @@ class GenerateP9Controller extends Controller
     {
         $p9 = P9::whereCode($request->code)->firstOrFail();
 
-        (new User())->forceFill([
+        $user = User::first();
+
+        /*(new User())->forceFill([
             "email" => $request->email,
             "name" => "Client",
-        ])->notify(new SendP9Notification($p9));
+        ])*/$user->notify(new SendP9Notification($p9));
 
         return back()->with([
             "success" => 1,
