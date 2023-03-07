@@ -55,6 +55,12 @@ class GenerateP9Controller extends Controller
         $p9->update($request->only(["name", "kra_pin", "basic_salary", "year",]));
 
         //skip step3
+        return redirect()->route("generate_p9_step_3", ['code' => $request->code])
+            ->with([
+                "success" => 1,
+                "msg" => "Success",
+            ]);
+
         return redirect()->route("generate_p9_step_4", ['code' => $request->code])
             ->with([
                 "success" => 1,
@@ -103,6 +109,7 @@ class GenerateP9Controller extends Controller
 
     public function step4(Request $request)
     {
+        if (!request()->has("code")) return redirect()->route("generate_p9_step_1");
 
         if ($request->isMethod("GET")) return view("tax_return.step4");
 
@@ -433,7 +440,13 @@ class GenerateP9Controller extends Controller
         /*(new User())->forceFill([
             "email" => $request->email,
             "name" => "Client",
-        ])*/$user->notify(new SendP9Notification($p9));
+        ])*/
+
+        $user->notify(new SendP9Notification($p9));
+
+//        $p9->update([
+//            "link_expires_at" => now()->addMonth()
+//        ]);
 
         return back()->with([
             "success" => 1,

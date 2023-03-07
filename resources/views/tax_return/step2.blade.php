@@ -58,11 +58,12 @@
                 </div>
                 <div class="mb-10 fv-row">
                     <!--begin::Label-->
-                    <label class="form-label mb-3">Personal KRA PIN</label>
+                    <label class="form-label mb-3">Personal KRA PIN &nbsp;&nbsp;&nbsp;</label>
+                    <label class="form-label mb-3 kra_pin text-danger" style="display: none;">Invalid KRA PIN</label>
                     <!--end::Label-->
                     <!--begin::Input-->
                     <input type="text" required class="form-control form-control-lg form-control-solid"
-                           name="kra_pin" placeholder="" value="{{$p9->kra_pin}}"/>
+                           name="kra_pin" id="kra_pin" placeholder="" value="{{$p9->kra_pin}}"/>
                     <!--end::Input-->
                 </div>
                 <div class="mb-10 fv-row">
@@ -148,6 +149,24 @@
 @section("js")
     <script>
         $(function (){
+
+
+            $("input#kra_pin").on("blur",function (){
+                if($(this).val().length !== 11){
+                    $(".kra_pin").show();
+                    $("#kra_pin").addClass("border-danger")
+                }
+            })
+
+            $("input#kra_pin").on("input focus",function (){
+                    $(".kra_pin").hide();
+                    $("#kra_pin").removeClass("border-danger")
+            })
+
+            $(document).on("click","button.close_modal",function (){
+                // alert("closer");
+                $("#exampleModal").modal("hide");
+            })
 
             $("button#customize_basic_salary").on("click",function (){
                 $("#exampleModal").modal("show");

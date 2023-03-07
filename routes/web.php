@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('home', [AdminController::class,'home'])->name('home');
 Route::get('payment', [AdminController::class,'payment'])->name('payment');
+
+
+//john from interswitch

@@ -106,7 +106,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Step 1-->
                         <div class="stepper-item {{$segment2=="step-1"?"current":""}}" data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
-                            <div class="stepper-wrapper">
+                            <a href="{{route("generate_p9_step_1",['code' => request()->code])}}" class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
                                     <i class="{{$segment2=="step-1"?"stepper-check":""}} fas fa-check"></i>
@@ -121,7 +121,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="stepper-desc fw-normal">Select your account type</div>
                                 </div>
                                 <!--end::Label-->
-                            </div>
+                            </a>
                             <!--end::Wrapper-->
                             <!--begin::Line-->
                             <div class="stepper-line h-40px"></div>
@@ -131,7 +131,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Step 2-->
                         <div class="stepper-item {{$segment2=="step-2"?"current":""}}" data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
-                            <div class="stepper-wrapper">
+                            <a href="{{route("generate_p9_step_2",['code' => request()->code])}}"  class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
                                     <i class="{{str_replace("step-","",$segment2)<=2?"stepper-check":""}} fas fa-check"></i>
@@ -146,7 +146,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="stepper-desc fw-normal">Enter your Personal Details</div>
                                 </div>
                                 <!--end::Label-->
-                            </div>
+                            </a>
                             <!--end::Wrapper-->
                             <!--begin::Line-->
                             <div class="stepper-line h-40px"></div>
@@ -156,7 +156,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Step 3-->
                         <div class="stepper-item {{$segment2=="step-3"?"current":""}}" data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
-                            <div class="stepper-wrapper">
+                            <a href="{{route("generate_p9_step_3",['code' => request()->code])}}" class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
                                     <i class="{{str_replace("step-","",$segment2)<=3?"stepper-check":""}} fas fa-check"></i>
@@ -172,7 +172,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="stepper-desc fw-normal">Other Income and Deductions</div>
                                 </div>
                                 <!--end::Label-->
-                            </div>
+                            </a>
                             <!--end::Wrapper-->
                             <!--begin::Line-->
                             <div class="stepper-line h-40px"></div>
@@ -182,7 +182,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Step 4-->
                         <div class="stepper-item {{$segment2=="step-4"?"current":""}}" data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
-                            <div class="stepper-wrapper">
+                            <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
                                     <i class="{{str_replace("step-","",$segment2)<=4?"stepper-check":""}} fas fa-check"></i>
@@ -197,7 +197,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="stepper-desc fw-normal">Provide your payment info</div>
                                 </div>
                                 <!--end::Label-->
-                            </div>
+                            </a>
                             <!--end::Wrapper-->
                             <!--begin::Line-->
                             <div class="stepper-line h-40px"></div>
