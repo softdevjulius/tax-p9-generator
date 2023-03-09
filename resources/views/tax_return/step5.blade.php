@@ -24,7 +24,8 @@
                                required
                                type="email"
                                class="form-control form-control-lg form-control-solid"
-                               value="email@company.com"/>
+                               placeholder="Example: email@company.com"
+                               value=""/>
                         <!--end::Input-->
                     </div>
                     <!--end::Title-->

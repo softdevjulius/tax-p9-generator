@@ -437,6 +437,13 @@ class GenerateP9Controller extends Controller
 
         $user = User::first();
 
+
+        if (empty($p9->transaction_code) || empty($p9->amount_paid))
+            return back()->with([
+                "success" => 0,
+                "msg" => "Please make payment before downloading",
+            ]);
+
         /*(new User())->forceFill([
             "email" => $request->email,
             "name" => "Client",
