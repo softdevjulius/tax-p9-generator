@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <form action="{{route("generate_p9_step_4")}}" method="post">
+    <form action="{{route("generate_p9_step_4_bank_detail")}}" method="post">
         @csrf
         <input type="hidden" name="code" value="{{request()->code}}">
 

@@ -2,126 +2,431 @@
 
 @section("content")
 
-    <form action="{{route("generate_p9_step_4")}}" method="post">
-        @csrf
-        <input type="hidden" name="code" value="{{request()->code}}">
+    <div class="row">
+        <form class="" id="tax_record_form" style="width: 60% !important;" action="{{route("generate_p9_step_3")}}" method="post">
+            @csrf
+            <input type="hidden" name="code" value="{{request()->code}}">
 
-        <div class="current" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-15">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Billing Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
+            <div class="current" data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
 
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Phone Number</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter yoiur phone and Press pay then check youur phone"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="phone_number" required value=""/>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
-                    <!--end::Label-->
-                    <!--begin::Input wrapper-->
-                    <input type="number" required class="form-control form-control-solid disabled" placeholder=""
-                           name="amount" readonly disabled value="1"/>
-                    <input type="hidden" name="amount" value="1">
-                    <!--end::Input wrapper-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
+                <!--end::Wrapper-->
             </div>
-            <!--end::Wrapper-->
+
+
+
+
+        </form>
+
+
+
+    </div>
+
+    <form action="{{route("generate_p9_step_4")}}" class="" method="post">
+        <div class="col-md-12 row" style="width: 100% !important;">
+            @csrf
+            <input type="hidden" name="code" value="{{request()->code}}">
+
+            <div class="col-md-6">
+                <!--begin::Label-->
+                <label id="pin" class="form-label mb-3">PIN</label>
+
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-lg form-control-solid"
+                       name="pin" value="{{$p9->kra_pin}}" required placeholder=""/>
+                <!--end::Input-->
+            </div>
+
+
+            <div class="col-md-6">
+                <!--begin::Label-->
+                <label id="return_type" class="form-label mb-3">Return Type</label>
+                <!--begin::Input-->
+                <select name="pin" class="form-control" id="pin">
+                    <option value="original">Original</option>
+                    <option value="amended">Amended</option>
+                </select>
+                <!--end::Input-->
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row col-md-12" style="width: 100% !important;">
+            <div class="col-md-6">
+                <!--begin::Label-->
+                <label class="form-label mb-3">Return Period From</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select name="period_from" class="form-control" id="period_from">
+                    @forelse(range(($period = now()->copy()->subYear())->format("Y"),$period->addYears(3)->format("Y")) as $year)
+                        <option value="{{$year}}">{{$year}}</option>
+                    @empty
+                    @endforelse
+                </select>
+                <!--end::Input-->
+            </div>
+
+            <div class="col-md-6">
+                <!--begin::Label-->
+                <label class="form-label mb-3">Return Period To</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select name="period_to" class="form-control" id="period_to">
+                    @forelse(range(($period = now()->copy()->subYear())->format("Y"),$period->addYears(3)->format("Y")) as $year)
+                        <option value="{{$year}}">{{$year}}</option>
+                    @empty
+                    @endforelse
+                </select>
+                <!--end::Input-->
+            </div>
+
+        </div>
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_other_income" id="has_other_income"
+                       data-kt-settings-notification="has_other_income"/>
+                <label class="form-check-label ps-2" for="has_other_income">Other income apart from employment income?</label>
+            </div>
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_partnership_income" id="has_partnership_income"
+                       data-kt-settings-notification="has_partnership_income"/>
+                <label class="form-check-label ps-2" for="has_partnership_income"> Do you have partnership income?</label>
+            </div>
+
+        </div>
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_estate_trust_income" id="has_estate_trust_income"
+                       data-kt-settings-notification="has_estate_trust_income"/>
+                <label class="form-check-label ps-2" for="has_estate_trust_income">Have estate trust income?</label>
+            </div>
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_employer_car" id="has_employer_car"
+                       data-kt-settings-notification="has_employer_car"/>
+                <label class="form-check-label ps-2" for="has_employer_car">Has your employer provided you with a car?</label>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_mortgage" id="has_mortgage"
+                       data-kt-settings-notification="has_mortgage"/>
+                <label class="form-check-label ps-2" for="has_mortgage">Do you have a mortgage?</label>
+            </div>
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_home_ownership_plan" id="has_home_ownership_plan"
+                       data-kt-settings-notification="has_home_ownership_plan"/>
+                <label class="form-check-label ps-2" for="has_home_ownership_plan">Do you have home ownership savings plan?</label>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_life_insurance_policy" id="has_life_insurance_policy"
+                       data-kt-settings-notification="has_life_insurance_policy"/>
+                <label class="form-check-label ps-2" for="has_life_insurance_policy">Do you have a life insurance policy?</label>
+            </div>
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_commercial_vehicle" id="has_commercial_vehicle"
+                       data-kt-settings-notification="has_commercial_vehicle"/>
+                <label class="form-check-label ps-2" for="has_commercial_vehicle">Do you have a commercial vehicle?</label>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_foreign_income" id="has_foreign_income"
+                       data-kt-settings-notification="has_foreign_income"/>
+                <label class="form-check-label ps-2" for="has_foreign_income">Do you earn any income from foreign country?</label>
+            </div>
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="has_disability_exemption_certificate" id="has_disability_exemption_certificate"
+                       data-kt-settings-notification="has_disability_exemption_certificate"/>
+                <label class="form-check-label ps-2" for="has_disability_exemption_certificate">Have you been issued the Exemption Certificate for disability?</label>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
+
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="declare_wife_income" id="declare_wife_income"
+                       data-kt-settings-notification="declare_wife_income"/>
+                <label class="form-check-label ps-2" for="declare_wife_income">Do you want to declare your wife's income?</label>
+            </div>
+
+            <div class="col-md-6">
+                <!--begin::Label-->
+                <label id="pin" class="form-label mb-3">Wife's PIN</label>
+
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-lg form-control-solid"
+                       name="wife_pin" value="" required placeholder=""/>
+                <!--end::Input-->
+            </div>
+
         </div>
 
 
-        <div class="d-flex flex-stack pt-15">
-            <div class="mr-2">
-                <a href="{{route("generate_p9_step_3",['code' => request()->code])}}" type="button" class="btn btn-lg btn-light-primary me-3">
-                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
-                    <span class="svg-icon svg-icon-4 me-1">
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-												<rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1"
-                                                      fill="currentColor"/>
-												<path
-                                                    d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z"
-                                                    fill="currentColor"/>
-											</svg>
-										</span>
-                    <!--end::Svg Icon-->Previous
-                </a>
-            </div>
+        <br>
+        <div class="row col-md-12" style="width: 100% !important;">
 
-            <div>
-                <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
-											<span class="indicator-label">Pay
-                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-											<span class="svg-icon svg-icon-4 ms-2">
-												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-													<rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1"
-                                                          transform="rotate(-180 18 13)" fill="currentColor"/>
-													<path
-                                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
-                                                        fill="currentColor"/>
-												</svg>
-											</span>
-                                                <!--end::Svg Icon--></span>
-                    <span class="indicator-progress">Please wait...
-											<span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                </button>
-                <button type="submit" class="btn btn-lg btn-primary">
-                    Make Payment
-                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                    <span class="svg-icon svg-icon-4 ms-1">
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-												<rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1"
-                                                      transform="rotate(-180 18 13)" fill="currentColor"/>
-												<path
-                                                    d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
-                                                    fill="currentColor"/>
-											</svg>
-										</span>
-                    <!--end::Svg Icon--></button>
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="wife_has_other_income" id="wife_has_other_income"
+                       data-kt-settings-notification="wife_has_other_income"/>
+                <label class="form-check-label ps-2" for="wife_has_other_income">Does your wife has any other income apart from employment income?</label>
             </div>
 
 
+            <div class="col-md-6">
+                <input class="form-check-input" type="checkbox" value="1" name="wife_has_disability_exemption_certificate" id="wife_has_disability_exemption_certificate"
+                       data-kt-settings-notification="wife_has_disability_exemption_certificate"/>
+                <label class="form-check-label ps-2" for="wife_has_disability_exemption_certificate">Has your wife been issued with Exemption certificate for disability?</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 offset-md-8">
+                <br>
+                <button class="btn btn-primary pull-right" style="float: right !important;">Next</button>
+
+            </div>
         </div>
 
     </form>
+
 
 @stop
 
 
 @section("js")
+    <script src="{{asset("js/file_saver.js")}}"></script>
+    <script src="{{asset("js/export_xlsx.js")}}"></script>
+    <script src="{{asset("js/table_export.js")}}"></script>
     <script>
         $(function (){
 
+            const export_file = function (){
+                // var exportType = 'csv';
+                $('table').tableExport({type:'csv'});
+                // $('#dataTable').tableExport({
+                //     type : exportType,
+                //     escape : 'false',
+                //     ignoreColumn: []
+                // });
+            }
+
+            $("#export_file").on("click",function (){
+                export_file()
+            })
+
+            const update_tax_records = () =>{
+                const data = $("#tax_record_form").serialize()
+                $.ajax({
+                    url:"{{route("generate_p9_tax_preview")}}",
+                    method:"post",
+                    data:{
+                        data,
+                        _token: "{{csrf_token()}}",
+                        code:"{{request()->code}}"
+                    },
+                    success:function (data){
+                        console.info(data)
+                        load_tax_preview()
+                    },
+                    error:function (e){
+                        console.log(e)
+                        load_tax_preview()
+                    }
+                })
+            }
+
+            update_tax_records();
+
+            const load_tax_preview = () =>{
+                $.ajax({
+                    url:"{{route('generate_p9_tax_preview',['code'=>request()->code])}}",
+                    method:'get',
+                    data:{
+                        '_token':"{{csrf_token()}}"
+                    },
+                    success:function (data){
+
+                        console.info(data)
+                        $("#tax_calculation_preview").html(data)
+                    },
+                    error:function (e){
+                        console.log(e)
+                    }
+                })
+            }
+
+            load_tax_preview();
+
+            $("a.add_other_income_deductions").on("click",function (){
+               $("div.other_incomes").append(`<div class="row other_income_">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label "> Income Name </label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input name="income_name[]" class="form-control form-control-lg form-control-solid"
+                                               value=""/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label "> Income Amount </label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input name="income_amount[]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
+                                               value=""/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label ">Expenses Amount</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input name="income_expense_amount[]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
+                                               value=""/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label "> Withholding Tax (in %)</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input name="withholding_tax[]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
+                                               value=""/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                        <div class="w-25 mt-10">
+                           <button type="button" class="btn btn-sm btn-danger btn-circle delete_income"><i class="fa fa-trash fa-3x"></i></button>
+
+                       </div>
+                            </div>
+                        </div>`)
+            });
+
+            $(document).on("click","button.remove_allowance, button.remove_deduction",function(){
+                $(this).closest("div.row").remove()
+                update_tax_records()
+            })
+            $(document).on("click","button.delete_income",function (){
+                $(this).closest("div.other_income_").remove()
+                update_tax_records()
+            })
+            $(document).on("input","input.taxable",function (){
+                update_tax_records()
+            })
+
+            $("button.add_allowance").on("click",function (){
+                const html_to_append = `<div class="row">
+                       <div class="col">
+                           <div class="fv-row mb-10">
+                               <!--begin::Label-->
+                               <label class="form-label "> Name </label>
+                               <!--end::Label-->
+                               <!--begin::Input-->
+                               <input name="allowance_name[]" class="form-control form-control-lg form-control-solid"
+                                      value=""/>
+                               <!--end::Input-->
+                           </div>
+                       </div>
+
+                       <div class="col">
+                           <div class="fv-row mb-10">
+                               <!--begin::Label-->
+                               <label class="form-label ">  Amount </label>
+                               <!--end::Label-->
+                               <!--begin::Input-->
+                               <input type="number" step="0.01" name="allowance_amount[]" class="taxable form-control form-control-lg form-control-solid"
+                                      value=""/>
+                               <!--end::Input-->
+                           </div>
+                       </div>
+                       <div class="w-25 mt-10">
+                           <button type="button" class="btn btn-sm btn-danger btn-circle remove_allowance"><i class="fa fa-trash fa-3x"></i></button>
+
+                       </div>
+                   </div>`;
+                $("div.allowances").append(html_to_append)
+            });
+
+            $("button.add_deduction").on("click",function (){
+                const html_to_append = `<div class="row">
+                        <div class="col">
+                            <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label "> Name </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input name="deduction_name[]" class="form-control form-control-lg form-control-solid"
+                                       value=""/>
+                                <!--end::Input-->
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label "> Amount </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="number" step="0.01" name="deduction_amount[]" class="taxable form-control form-control-lg form-control-solid"
+                                       value=""/>
+                                <!--end::Input-->
+                            </div>
+                        </div>
+                        <div class="w-25 mt-10">
+                            <button type="button" class="btn btn-sm btn-danger btn-circle remove_deduction"><i class="fa fa-trash fa-3x"></i></button>
+
+                        </div>
+                    </div>`;
+
+                $("div.deductions").append(html_to_append)
+            })
+
             $("#billing2").prop("checked",true);
 
+            $("#nhif, #nssf").on("change",function(){
+                update_tax_records()
+            })
             $("#billing1, #billing2").on("change",function(){
                 // alert($(this).val())
 
@@ -133,260 +438,6 @@
     </script>
 @stop
 
-
-
-@section("others")
-
-    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" action="{{route("generate_p9_step_3")}}" method="post">
-        @csrf
-        <!--begin::Step 1-->
-
-        <!--end::Step 1-->
-        <!--begin::Step 2-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-15">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Tax Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="mb-10 fv-row">
-                    <div class="form-check form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="1" id="billing1"
-                               name="year"
-                               data-kt-settings-notification="email"/>
-                        <label class="form-check-label ps-2" for="billing1"> Year</label>
-                    </div>
-                    </br>
-                    <div class="form-check form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="" id="billing2"
-                               name="year" required/>
-                        <label class="form-check-label ps-2" for="billing2">Monthly</label>
-                    </div>
-
-
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Name of Organisation</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid"
-                           name="name_of_organisation" placeholder="" value=""/>
-                    <!--end::Input-->
-                </div>
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Personal KRA PIN</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="text" class="form-control form-control-lg form-control-solid"
-                           name="kra_pin" placeholder="" value=""/>
-                    <!--end::Input-->
-                </div>
-                <div class="mb-10 fv-row">
-                    <!--begin::Label-->
-                    <label class="form-label mb-3">Basic Salary</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input type="number" class="form-control form-control-lg form-control-solid"
-                           name="basic_salary" placeholder="" value=""/>
-                    <!--end::Input-->
-                </div>
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Step 2-->
-        <!--begin::Step 3-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-12">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Company Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label required"> Organisation Name </label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label required"> Organisation KRA PIN</label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label "> Allowances </label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-
-                <div class="fv-row mb-10">
-                    <!--begin::Label-->
-                    <label class="form-label "> Deductions </label>
-                    <!--end::Label-->
-                    <!--begin::Input-->
-                    <input name="business_name" class="form-control form-control-lg form-control-solid"
-                           value=" "/>
-                    <!--end::Input-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Step 3-->
-        <!--begin::Step 4-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-                <!--begin::Heading-->
-                <div class="pb-10 pb-lg-15">
-                    <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Billing Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Phone Number</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter yoiur phone and Press pay then check youur phone"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="card_name" value=""/>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
-                    <!--end::Label-->
-                    <!--begin::Input wrapper-->
-                    <input type="number" class="form-control form-control-solid" placeholder=""
-                           name="amount" value="100"/>
-                    <!--end::Input wrapper-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-                <!--begin::Input group-->
-
-                <!--end::Input group-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Step 4-->
-        <!--begin::Step 5-->
-        <div class="" data-kt-stepper-element="content">
-            <!--begin::Wrapper-->
-            <div class="w-100">
-
-
-                <!--begin::Heading-->
-                <div class="pb-8 pb-lg-10">
-                    <!--begin::Title-->
-                    <div class="fv-row mb-0">
-                        <!--begin::Label-->
-                        <label class="fs-6 fw-semibold form-label "> Email</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input name="business_email"
-                               class="form-control form-control-lg form-control-solid"
-                               value="email@company.com"/>
-                        <!--end::Input-->
-                    </div>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
-
-                    <!--end::Notice-->
-                </div>
-                <div class="d-flex flex-stack">
-                    <!--begin::Label-->
-                    <button type="button" class="btn btn-lg btn-primary"
-                            data-kt-stepper-action="Finish">
-											<span class="indicator-label" class="bi-cloud-download">Download Draft
-                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-
-                                                <!--end::Svg Icon--></span>
-
-
-                    </button>
-                    <!--end::Label-->
-                    <!--begin::Switch-->
-                    <label class="form-check form-switch form-check-custom form-check-solid">
-                        <input class="form-check-input" type="checkbox" value="1"/>
-                        <span class="form-check-label fw-semibold text-muted"> Send to Mail</span>
-                    </label>
-                    <!--end::Switch-->
-
-                </div>
-
-                </br>
-                </br>
-                </br>
-                </br>
-                </br>
-                <!--end::Heading-->
-                <!--begin::Body-->
-                <p> Disclaimer content</p>
-                <!--end::Body-->
-            </div>
-
-
-
-
-            <!--end::Wrapper-->
-        </div>
-
-    </form>
-@stop
 
 
 @section("footer_button")

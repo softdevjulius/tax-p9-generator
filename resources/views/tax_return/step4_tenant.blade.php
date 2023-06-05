@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <form action="{{route("generate_p9_step_4")}}" method="post">
+    <form action="{{route("generate_p9_step_4_tenant")}}" method="post">
         @csrf
         <input type="hidden" name="code" value="{{request()->code}}">
 
@@ -12,76 +12,47 @@
                 <!--begin::Heading-->
                 <div class="pb-10 pb-lg-15">
                     <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Bank Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
+                    <h2 class="fw-bold text-dark">Tenant(s) Details</h2>
+                    <a href="{{route("generate_p9_step_4_add_tenant",['code'=>request()->code])}}" class="btn btn-primary pull-right" style="float: right !important;"> <i class="fa fa-plus"></i> Add</a>
+                </div>
 
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Bank Name</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="bank_name" required value=""/>
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Branch Name</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="branch_name" required value=""/>
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">City</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="city" required value=""/>
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Account Holder Name</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="account_holder_name" required value=""/>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold form-label mb-2">Account Number</label>
-                    <!--end::Label-->
-                    <!--begin::Input wrapper-->
-                    <input type="number" required class="form-control form-control-solid disabled" placeholder=""
-                           name="account_number"/>
-                    <!--end::Input wrapper-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
+                <div class="w-100">
+                    <table class="w-100">
+                        <thead>
+                        <th>PIN</th>
+                        <th>Name</th>
+                        <th>L.R Number</th>
+                        <th>Building</th>
+                        <th>Actions</th>
+                        </thead>
+                        <tbody>
+                        @forelse($tenants as $tenant)
 
-                <!--end::Input group-->
-                <!--begin::Input group-->
+                            <tr>
+                                <td>{{$tenant->pin}}</td>
+                                <td>{{$tenant->name}}</td>
+                                <td>{{$tenant->lr_number}}</td>
+                                <td>{{$tenant->building}}</td>
+                                <td>
+                                    <div class="form-inline">
+                                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                                        <button type="button" class="btn btn-sm btn-info"><i class="fa fa-pen"></i></button>
+                                        <a href="{{route("generate_p9_step_4_delete_tenant",["id"=>$tenant->id,'code'=>request()->code])}}" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
 
-                <!--end::Input group-->
+                        @empty
+                            <tr>
+                                <td colspan="5" style="text-align: center; padding-top: 20px">
+                                    No tenants added.
+                                </td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
             <!--end::Wrapper-->
         </div>
@@ -89,7 +60,8 @@
 
         <div class="d-flex flex-stack pt-15">
             <div class="mr-2">
-                <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" type="button" class="btn btn-lg btn-light-primary me-3">
+                <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" type="button"
+                   class="btn btn-lg btn-light-primary me-3">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
                     <span class="svg-icon svg-icon-4 me-1">
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -124,7 +96,7 @@
 											<span
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
-                <button type="submit" class="btn btn-lg btn-primary">
+                <a href="{{route("generate_p9_step_4_tenant_wife",['code'=>request()->code])}}" type="button" class="btn btn-lg btn-primary">
                     Next
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                     <span class="svg-icon svg-icon-4 ms-1">
@@ -137,7 +109,7 @@
                                                     fill="currentColor"/>
 											</svg>
 										</span>
-                    <!--end::Svg Icon--></button>
+                    <!--end::Svg Icon--></a>
             </div>
 
 
@@ -150,15 +122,15 @@
 
 @section("js")
     <script>
-        $(function (){
+        $(function () {
 
-            $("#billing2").prop("checked",true);
+            $("#billing2").prop("checked", true);
 
-            $("#billing1, #billing2").on("change",function(){
+            $("#billing1, #billing2").on("change", function () {
                 // alert($(this).val())
 
-                $("#billing1, #billing2").prop('checked',false);
-                $(this).prop('checked',true);
+                $("#billing1, #billing2").prop('checked', false);
+                $(this).prop('checked', true);
 
             })
         })
@@ -169,7 +141,8 @@
 
 @section("others")
 
-    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" action="{{route("generate_p9_step_5")}}" method="post">
+    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form"
+          action="{{route("generate_p9_step_4_auditor")}}" method="post">
         @csrf
         <!--begin::Step 1-->
 
@@ -410,8 +383,6 @@
                 <p> Disclaimer content</p>
                 <!--end::Body-->
             </div>
-
-
 
 
             <!--end::Wrapper-->

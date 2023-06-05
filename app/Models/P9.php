@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class P9 extends Model
 {
@@ -20,6 +22,10 @@ class P9 extends Model
         return $this->hasMany(P9MonthBasicSalary::class,"");
     }
 
+    public function returnInformation()
+    {
+        return $this->hasOne(ReturnInformation::class,"p9_id");
+    }
     public static function generateUniqueCode()
     {
         $largest_base = 30;
@@ -51,6 +57,41 @@ class P9 extends Model
     public function incomes()
     {
         return $this->hasMany(P9Income::class);
+    }
+
+    public function bankDetail():HasOne
+    {
+        return $this->hasOne(P9BankDetail::class,'p9_id');
+    }
+
+    public function auditor():HasOne
+    {
+        return $this->hasOne(P9Auditor::class,'p9_id');
+    }
+
+    public function shouldDeclareForWife():bool
+    {
+        return boolval($this->returnInformation?->declare_wife_income);
+    }
+
+    public function landlord():HasOne
+    {
+        return $this->hasOne(P9Landlord::class,'p9_id');
+    }
+
+    public function landlordWife():HasOne
+    {
+        return $this->hasOne(P9LandlordWife::class,'p9_id');
+    }
+
+    public function tenants():HasMany
+    {
+        return $this->hasMany(P9Tenant::class,'p9_id');
+    }
+
+    public function tenantWives():HasMany
+    {
+        return $this->hasMany(P9TenantWife::class,'p9_id');
     }
 
     public static function boot()

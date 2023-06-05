@@ -2,6 +2,105 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get("excel",function (){
+
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $activeWorksheet = $spreadsheet->getActiveSheet();
+    $activeWorksheet->setCellValue([5,7], 'Hello World !');
+
+//    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $spreadsheet->createSheet()->setTitle("closer");
+    $spreadsheet->setActiveSheetIndex(1);
+    $activeWorksheet = $spreadsheet->getActiveSheet();
+    $activeWorksheet->setCellValue('A1', 'Hello sadasdads !');
+
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+    $writer->save('hello world.xlsx');
+
+
+});
+
+Route::get("shits",function (){
+
+    $fileName = "members-data_" . date('Y-m-d') . ".xls";
+
+// Column names
+    $fields = array('ID', 'FIRST NAME', 'LAST NAME', 'EMAIL', 'GENDER', 'COUNTRY', 'CREATED', 'STATUS');
+
+// Display column names as first row
+    $excelData = implode("\t", array_values($fields)) . "\n";
+
+// Fetch records from database
+
+        $excelData .= 'No records found...'. "\n";
+
+    // Headers for download
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=\"$fileName\"");
+
+// Render excel data
+    echo $excelData;
+});
+
+Route::get("sheet",function (){
+    $objPHPExcel = new PHPExcel();
+
+    // Add a new worksheet to the workbook
+    $objPHPExcel->createSheet();
+
+// Add another worksheet to the workbook, at index 0
+    $objPHPExcel->createSheet(0);
+
+    // Set the second worksheet as the active worksheet
+    $objPHPExcel->setActiveSheetIndex(1);
+    // Set the active worksheet
+    $objPHPExcel->setActiveSheetIndex(0);
+    $objPHPExcel->getActiveSheet()->setTitle('Name of Sheet 1');
+
+// Add some data to cell A1
+    $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Hello, world!');
+
+// Set the active worksheet to the second worksheet
+    $objPHPExcel->setActiveSheetIndex(1);
+    $objPHPExcel->getActiveSheet()->setTitle('Name of Sheet 2');
+
+// Add some data to cell B2
+    $objPHPExcel->getActiveSheet()->setCellValue('B2', 'Goodbye, world!');
+
+
+    // Save the Excel file to the output stream
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+    $objWriter->save('php://output');
+});
+
+Route::get("sheets",function (){
+    $objPHPExcel = new PHPExcel();
+
+// Create a first sheet, representing sales data
+    $objPHPExcel->setActiveSheetIndex(0);
+    $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Something');
+
+// Rename sheet
+    $objPHPExcel->getActiveSheet()->setTitle('Name of Sheet 1');
+
+// Create a new worksheet, after the default sheet
+    $objPHPExcel->createSheet();
+
+// Add some data to the second sheet, resembling some different data types
+    $objPHPExcel->setActiveSheetIndex(1);
+    $objPHPExcel->getActiveSheet()->setCellValue('A1', 'More data');
+
+// Rename 2nd sheet
+    $objPHPExcel->getActiveSheet()->setTitle('Second sheet');
+
+// Redirect output to a client’s web browser (Excel5)
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="name_of_file.xls"');
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+});
+
 Route::get("/",function (){
 
 

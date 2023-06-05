@@ -14,7 +14,19 @@ Route::group(['prefix' => "generate-p9"],function (){
     Route::match(['GET',"POST"],'step-2',[GenerateP9Controller::class,'step2'])->name("generate_p9_step_2");
     Route::match(['GET',"POST"],'step-3',[GenerateP9Controller::class,'step3'])->name("generate_p9_step_3");
     Route::match(['GET',"POST"],'step-4',[GenerateP9Controller::class,'step4'])->name("generate_p9_step_4");
+    Route::match(['GET',"POST"],'step-4-bank-detail',[GenerateP9Controller::class,'step4BankDetail'])->name("generate_p9_step_4_bank_detail");
+    Route::match(['GET',"POST"],'step-4-auditor',[GenerateP9Controller::class,'step4Auditor'])->name("generate_p9_step_4_auditor");
+    Route::match(['GET',"POST"],'step-4-landlord',[GenerateP9Controller::class,'step4Landlord'])->name("generate_p9_step_4_landlord");
+    Route::match(['GET',"POST"],'step-4-landlord-wife',[GenerateP9Controller::class,'step4LandlordWife'])->name("generate_p9_step_4_landlord_wife");
+    Route::match(['GET',"POST"],'step-4-tenant',[GenerateP9Controller::class,'step4Tenant'])->name("generate_p9_step_4_tenant");
+    Route::match(['GET',"POST"],'step-4-add-tenant',[GenerateP9Controller::class,'step4AddTenant'])->name("generate_p9_step_4_add_tenant");
+    Route::match(['GET',"POST"],'step-4-delete-tenant/{id}',[GenerateP9Controller::class,'step4DeleteTenant'])->name("generate_p9_step_4_delete_tenant");
+    Route::match(['GET',"POST"],'step-4-tenant-wife',[GenerateP9Controller::class,'step4TenantWife'])->name("generate_p9_step_4_tenant_wife");
+    Route::match(['GET',"POST"],'step-4-add-tenant-wife',[GenerateP9Controller::class,'step4AddTenantWife'])->name("generate_p9_step_4_add_tenant_wife");
+    Route::match(['GET',"POST"],'step-4-delete-tenant-wife/{id}',[GenerateP9Controller::class,'step4DeleteTenantWife'])->name("generate_p9_step_4_delete_tenant_wife");
     Route::match(['GET',"POST"],'step-5',[GenerateP9Controller::class,'step5'])->name("generate_p9_step_5");
+    Route::match(['GET',"POST"],'step-6',[GenerateP9Controller::class,'step6'])->name("generate_p9_step_6");
+    Route::match(['GET',"POST"],'step-7',[GenerateP9Controller::class,'step7'])->name("generate_p9_step_7");
     Route::match(['GET',"POST"],'tax-preview',[GenerateP9Controller::class,'taxPreview'])->name("generate_p9_tax_preview");
     Route::match(['PUT',"POST"],"customize-basic-salary",[GenerateP9Controller::class,'customizeBasicSalary'])->name("generate_p9_customize_basic_salary");
 

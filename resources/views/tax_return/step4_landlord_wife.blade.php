@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <form action="{{route("generate_p9_step_4")}}" method="post">
+    <form action="{{route("generate_p9_step_4_auditor")}}" method="post">
         @csrf
         <input type="hidden" name="code" value="{{request()->code}}">
 
@@ -12,76 +12,189 @@
                 <!--begin::Heading-->
                 <div class="pb-10 pb-lg-15">
                     <!--begin::Title-->
-                    <h2 class="fw-bold text-dark">Bank Details</h2>
-                    <!--end::Title-->
-                    <!--begin::Notice-->
+                    <h2 class="fw-bold text-dark">Landlord (wife)</h2>
+                </div>
 
-                    <!--end::Notice-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Bank Name</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="bank_name" required value=""/>
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Branch Name</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="branch_name" required value=""/>
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">City</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="city" required value=""/>
-                </div>
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Account Holder Name</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter your bank name"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="account_holder_name" required value=""/>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold form-label mb-2">Account Number</label>
-                    <!--end::Label-->
-                    <!--begin::Input wrapper-->
-                    <input type="number" required class="form-control form-control-solid disabled" placeholder=""
-                           name="account_number"/>
-                    <!--end::Input wrapper-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
+                <div class="w-100">
+                    <div class="row col-md-12">
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Landlord Pin</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Landlord Pin"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="landlord_pin" required value=""/>
+                        </div>
 
-                <!--end::Input group-->
-                <!--begin::Input group-->
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Landlord Name</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Landlord Name"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="landlord_name" required value=""/>
+                        </div>
 
-                <!--end::Input group-->
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">L.R Number</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="L.R Number"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="lr_number" required value=""/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="w-100">
+                    <div class="row col-md-12">
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Building</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Building"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="building" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Street/Road</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Street / Road"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="street" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">City/Town</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="City/Town"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="city" required value=""/>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="w-100">
+                    <div class="row col-md-12">
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">County</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="County"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="county" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">District</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="District"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="district" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Locality</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Locality"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="locality" required value=""/>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="w-100">
+                    <div class="row col-md-12">
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Descriptive Area</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Descriptive Area"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="area" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">P.O Box</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="P.O Box"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="po_box" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Post Office Name</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Post Office Name"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="po_name" required value=""/>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="w-100">
+                    <div class="row col-md-12">
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Postal Code</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Postal Code"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="postal_code" required value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Date From</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Date From"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="date_from" required value=""/>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
             <!--end::Wrapper-->
         </div>
@@ -89,7 +202,8 @@
 
         <div class="d-flex flex-stack pt-15">
             <div class="mr-2">
-                <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" type="button" class="btn btn-lg btn-light-primary me-3">
+                <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" type="button"
+                   class="btn btn-lg btn-light-primary me-3">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
                     <span class="svg-icon svg-icon-4 me-1">
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -125,7 +239,7 @@
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
                 <button type="submit" class="btn btn-lg btn-primary">
-                    Next
+                    Make Payment
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                     <span class="svg-icon svg-icon-4 ms-1">
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -150,15 +264,15 @@
 
 @section("js")
     <script>
-        $(function (){
+        $(function () {
 
-            $("#billing2").prop("checked",true);
+            $("#billing2").prop("checked", true);
 
-            $("#billing1, #billing2").on("change",function(){
+            $("#billing1, #billing2").on("change", function () {
                 // alert($(this).val())
 
-                $("#billing1, #billing2").prop('checked',false);
-                $(this).prop('checked',true);
+                $("#billing1, #billing2").prop('checked', false);
+                $(this).prop('checked', true);
 
             })
         })
@@ -169,7 +283,8 @@
 
 @section("others")
 
-    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form" action="{{route("generate_p9_step_5")}}" method="post">
+    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form"
+          action="{{route("generate_p9_step_4_auditor")}}" method="post">
         @csrf
         <!--begin::Step 1-->
 
@@ -410,8 +525,6 @@
                 <p> Disclaimer content</p>
                 <!--end::Body-->
             </div>
-
-
 
 
             <!--end::Wrapper-->
