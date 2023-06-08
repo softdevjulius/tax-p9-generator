@@ -77,31 +77,32 @@ class GenerateP9Controller extends Controller
 
         if ($request->isMethod("GET")) return view("tax_return.step3");
 
-//        $p9 = P9::whereCode($request->code)->firstOrFail();
+        $p9 = P9::whereCode($request->code)->firstOrFail();
 
-//        if (sizeof($request->allowance_name)>0){
-//            foreach ($request->allowance_name as $index => $allowance) {
-//            if(empty($request->allowance_amount[$index]))
-//                continue;
-//
-//            $p9->allowances()->create([
-//                "name" => $request->allowance_name[$index],
-//                "amount" => $request->allowance_amount[$index],
-//            ]);
-//        }
-//        }
-//
-//        if (sizeof($request->allowance_name)>0){
-//            foreach ($request->deduction_name as $index => $allowance) {
-//            if(empty($request->deduction_amount[$index]))
-//                continue;
-//
-//            $p9->deductions()->create([
-//                "name" => $request->deduction_name[$index],
-//                "amount" => $request->deduction_amount[$index],
-//            ]);
-//        }
-//        }
+        //add incomes
+        //alongside income expenses
+        foreach ($request->income_expense_amount as $item_number => $expenses) {
+            //income
+            if (empty($request->income_name[$item_number])) continue;
+
+            $income = $p9->incomes()->create([
+                "name" => $request->income_name[$item_number][0],
+                "amount" => $request->income_amount[$item_number][0]
+            ]);
+            foreach ($expenses as $index => $expense) {
+                if (empty($expense)) continue;
+                //expense
+                $income->expenses()->create([
+                    "expense_amount" => $request->income_expense_amount[$item_number][$index],
+                    "withholding_tax" => $request->withholding_tax[$item_number][$index],
+                    "company_name" => $request->income_expense_company_name[$item_number][$index],
+                    "company_pin" => $request->income_expense_company_pin[$item_number][$index],
+                ]);
+
+            }
+        }
+        //
+
 
         return redirect()->route("generate_p9_step_4", ["code" => $request->code])->with([
             "success" => 1,
@@ -233,14 +234,14 @@ class GenerateP9Controller extends Controller
         $p9 = P9::whereCode($request->code)->firstOrFail();
         $tenants = $p9->tenants;
 
-        if ($request->isMethod('GET')) return view("tax_return.step4_tenant",compact("p9",'tenants'));
+        if ($request->isMethod('GET')) return view("tax_return.step4_tenant", compact("p9", 'tenants'));
 
         dd($request->all());
 
 //        $p9->tenants()->create()
     }
 
-    public function step4DeleteTenant($id,Request $request)
+    public function step4DeleteTenant($id, Request $request)
     {
         P9Tenant::whereId($id)->delete();
 
@@ -249,6 +250,7 @@ class GenerateP9Controller extends Controller
             "msg" => "Success",
         ]);
     }
+
     public function step4AddTenant(Request $request)
     {
         if (!request()->has("code")) return redirect()->route("generate_p9_step_1");
@@ -288,14 +290,14 @@ class GenerateP9Controller extends Controller
         $p9 = P9::whereCode($request->code)->firstOrFail();
         $tenant_wives = $p9->tenantWives;
 
-        if ($request->isMethod('GET')) return view("tax_return.step4_tenant_wives",compact("p9",'tenant_wives'));
+        if ($request->isMethod('GET')) return view("tax_return.step4_tenant_wives", compact("p9", 'tenant_wives'));
 
         dd($request->all());
 
 //        $p9->tenants()->create()
     }
 
-    public function step4DeleteTenantWife($id,Request $request)
+    public function step4DeleteTenantWife($id, Request $request)
     {
         P9TenantWife::whereId($id)->delete();
 
@@ -304,6 +306,7 @@ class GenerateP9Controller extends Controller
             "msg" => "Success",
         ]);
     }
+
     public function step4AddTenantWife(Request $request)
     {
         if (!request()->has("code")) return redirect()->route("generate_p9_step_1");
