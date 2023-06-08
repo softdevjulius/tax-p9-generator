@@ -81,30 +81,32 @@ class GenerateP9Controller extends Controller
 
         //add incomes
         //alongside income expenses
-        foreach ($request->income_expense_amount as $item_number => $expenses) {
-            //income
-            if (empty($request->income_name[$item_number])) continue;
+        if (isset($request->income_expense_amount) && sizeof($request->income_expense_amount)) {
+            foreach ($request->income_expense_amount as $item_number => $expenses) {
+                //income
+                if (empty($request->income_name[$item_number])) continue;
 
-            $income = $p9->incomes()->create([
-                "name" => $request->income_name[$item_number][0],
-                "amount" => $request->income_amount[$item_number][0]
-            ]);
-            foreach ($expenses as $index => $expense) {
-                if (empty($expense)) continue;
-                //expense
-                $income->expenses()->create([
-                    "expense_amount" => $request->income_expense_amount[$item_number][$index],
-                    "withholding_tax" => $request->withholding_tax[$item_number][$index],
-                    "company_name" => $request->income_expense_company_name[$item_number][$index],
-                    "company_pin" => $request->income_expense_company_pin[$item_number][$index],
+                $income = $p9->incomes()->create([
+                    "name" => $request->income_name[$item_number][0],
+                    "amount" => $request->income_amount[$item_number][0]
                 ]);
+                foreach ($expenses as $index => $expense) {
+                    if (empty($expense)) continue;
+                    //expense
+                    $income->expenses()->create([
+                        "expense_amount" => $request->income_expense_amount[$item_number][$index],
+                        "withholding_tax" => $request->withholding_tax[$item_number][$index],
+                        "company_name" => $request->income_expense_company_name[$item_number][$index],
+                        "company_pin" => $request->income_expense_company_pin[$item_number][$index],
+                    ]);
 
+                }
             }
         }
         //
 
 
-        return redirect()->route("generate_p9_step_5", ["code" => $request->code])->with([
+        return redirect()->route("generate_p9_step_6", ["code" => $request->code])->with([
             "success" => 1,
             "msg" => "Success",
         ]);
@@ -426,6 +428,30 @@ class GenerateP9Controller extends Controller
         }
 
 
+
+
+        ////REMOVETHIS
+
+        $p9->update([
+            "phone" => format_phone_number($request->phone_number),
+            "amount" => $request->amount
+        ]);
+
+        trigger_mpesa_stk_push($p9->mpesa_phone ?? $p9->phone, $p9->amount, $p9->code, $p9->code);
+
+        return back()->with([
+            "success" => 1,
+            "msg" => "Success",
+        ]);
+
+        return redirect()->route("generate_p9_step_7", ["code" => $request->code])->with([
+            "success" => 1,
+            "msg" => "Success",
+        ]);
+
+        ////REMOVETHIS
+
+
         $tax = .3 * ($p9->basic_salary + $p9->allowances()->sum("amount") - $p9->deductions()->sum("amount"));
 
         $p9->update([
@@ -465,6 +491,11 @@ class GenerateP9Controller extends Controller
             "success" => 1,
             "msg" => "Success",
         ]);
+    }
+
+    public function step7()
+    {
+        return view("tax_return.step7");
     }
 
     private function taxPreviewData(P9 $p9)
