@@ -104,7 +104,7 @@ class GenerateP9Controller extends Controller
         //
 
 
-        return redirect()->route("generate_p9_step_4", ["code" => $request->code])->with([
+        return redirect()->route("generate_p9_step_5", ["code" => $request->code])->with([
             "success" => 1,
             "msg" => "Success",
         ]);
