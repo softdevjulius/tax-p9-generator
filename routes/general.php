@@ -27,6 +27,7 @@ Route::group(['prefix' => "generate-p9"],function (){
     Route::match(['GET',"POST"],'step-5',[GenerateP9Controller::class,'step5'])->name("generate_p9_step_5");
     Route::match(['GET',"POST"],'step-6',[GenerateP9Controller::class,'step6'])->name("generate_p9_step_6");
     Route::match(['GET',"POST"],'step-7',[GenerateP9Controller::class,'step7'])->name("generate_p9_step_7");
+    Route::match(['GET',"POST"],'book-meeting',[GenerateP9Controller::class,'bookMeeting'])->name("generate_p9_book_meeting");
     Route::match(['GET',"POST"],'tax-preview',[GenerateP9Controller::class,'taxPreview'])->name("generate_p9_tax_preview");
     Route::match(['PUT',"POST"],"customize-basic-salary",[GenerateP9Controller::class,'customizeBasicSalary'])->name("generate_p9_customize_basic_salary");
 
@@ -41,5 +42,10 @@ Route::group(['prefix' => "business"],function (){
     Route::match(['GET',"POST"],'step-4',[BusinessController::class,'step4'])->name("business_step_4");
     Route::match(['GET',"POST"],'step-5',[BusinessController::class,'step5'])->name("business_step_5");
     Route::match(['GET',"POST"],'step-6',[BusinessController::class,'step6'])->name("business_step_6");
+
+});
+
+Route::get("closer",function (){
+    return view("tax_return.schedule");
 
 });

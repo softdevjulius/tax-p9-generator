@@ -46,3 +46,8 @@ if (!function_exists("trigger_mpesa_stk_push")){
         return $response;
     }
 }
+if (!function_exists("get_bill_amount")) {
+    function get_bill_amount(){
+        return 1;
+    }
+}

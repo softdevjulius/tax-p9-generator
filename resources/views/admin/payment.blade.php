@@ -16,7 +16,7 @@
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <!--begin::Item-->
                             <li class="breadcrumb-item text-muted">
-                                <a href="../../index.html" class="text-muted text-hover-primary">Home</a>
+                                <a href="{{route("home")}}" class="text-muted text-hover-primary">Home</a>
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
@@ -309,7 +309,7 @@
                                         <!--end::Checkbox-->
                                         <!--begin::Customer=-->
                                         <td>
-                                            <a href="../customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{$payment -> organisation_name?? implode(", ",$payment->streams()->pluck("business_name")->toArray())}}</a>
+                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$payment -> name}}</a>
                                         </td>
                                         <!--end::Customer=-->
                                         <!--begin::Status=-->
@@ -319,7 +319,13 @@
                                         <!--end::Status=-->
                                         <!--begin::Billing=-->
                                         <td>
-                                            <div class="badge badge-light">Paid</div>
+                                            @if(empty($payment->amount_paid))
+                                                <div class="badge badge-light-danger">{{"Due"}}</div>
+
+                                            @else
+                                                <div class="badge badge-light-success">{{"Paid"}}</div>
+
+                                            @endif
                                         </td>
                                         <!--end::Billing=-->
                                         <!--begin::Product=-->

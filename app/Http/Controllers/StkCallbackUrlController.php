@@ -46,6 +46,9 @@ class StkCallbackUrlController extends Controller
                 "mpesa_phone" => $phone_number,
             ]);
 
+            //trigger the event,
+            event(new \App\Events\P9ChargesPaidEvent('Mpesa Transaction was successfully',$code));
+
         }
 
 
