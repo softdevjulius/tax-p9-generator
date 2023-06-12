@@ -81,28 +81,28 @@ class GenerateP9Controller extends Controller
 
         //add incomes
         //alongside income expenses
-        if (isset($request->income_expense_amount) && sizeof($request->income_expense_amount)) {
-            foreach ($request->income_expense_amount as $item_number => $expenses) {
-                //income
-                if (empty($request->income_name[$item_number])) continue;
-
-                $income = $p9->incomes()->create([
-                    "name" => $request->income_name[$item_number][0],
-                    "amount" => $request->income_amount[$item_number][0]
-                ]);
-                foreach ($expenses as $index => $expense) {
-                    if (empty($expense)) continue;
-                    //expense
-                    $income->expenses()->create([
-                        "expense_amount" => $request->income_expense_amount[$item_number][$index],
-                        "withholding_tax" => $request->withholding_tax[$item_number][$index],
-                        "company_name" => $request->income_expense_company_name[$item_number][$index],
-                        "company_pin" => $request->income_expense_company_pin[$item_number][$index],
-                    ]);
-
-                }
-            }
-        }
+//        if (isset($request->income_expense_amount) && sizeof($request->income_expense_amount)) {
+//            foreach ($request->income_expense_amount as $item_number => $expenses) {
+//                //income
+//                if (empty($request->income_name[$item_number])) continue;
+//
+//                $income = $p9->incomes()->create([
+//                    "name" => $request->income_name[$item_number][0],
+//                    "amount" => $request->income_amount[$item_number][0]
+//                ]);
+//                foreach ($expenses as $index => $expense) {
+//                    if (empty($expense)) continue;
+//                    //expense
+//                    $income->expenses()->create([
+//                        "expense_amount" => $request->income_expense_amount[$item_number][$index],
+//                        "withholding_tax" => $request->withholding_tax[$item_number][$index],
+//                        "company_name" => $request->income_expense_company_name[$item_number][$index],
+//                        "company_pin" => $request->income_expense_company_pin[$item_number][$index],
+//                    ]);
+//
+//                }
+//            }
+//        }
         //
 
 
@@ -517,11 +517,20 @@ class GenerateP9Controller extends Controller
         });
         $total_individual_income_tax = (new TaxHandler($p9))->calculateTaxAmount($total_taxable_other_income);
         $total_individual_income_tax = ($total_individual_income_tax > $personal_relief ? ($total_individual_income_tax - $personal_relief) : 0);
-        $total_withholding_tax = $p9->incomes->sum(function ($income) {
-            if (empty($income->withholding_tax) && $income->withholding_tax <= 0)
-                return 0;
-            return $income->amount * (16 / 100) * ($income->withholding_tax / 100);
-        });
+//        $total_withholding_tax = $p9->incomes->sum(function ($income) {
+//            if (empty($income->withholding_tax) && $income->withholding_tax <= 0)
+//                return 0;
+//            return $income->amount * (16 / 100) * ($income->withholding_tax / 100);
+//        });
+
+        $total_withholding_tax = 0;
+        if ($p9->incomes()->count())
+            foreach ($p9->incomes as $income) {
+                $total_withholding_tax += $income->expenses->sum(function ($expense){
+                    if (empty($expense->withholding_tax) || empty($expense->expense_amount)) return 0;
+                    return $expense->expense_amount * (16/100) * ($expense->withholding_tax/100);
+                });
+            }
 
         return compact(
             "kra_pin",
@@ -651,21 +660,26 @@ class GenerateP9Controller extends Controller
 
                 $index += 1;
             }
-        $index = 0;
-        if (isset($data['income_amount']))
-            foreach ($data['income_amount'] as $income_amount) {
-
-                if (!empty($income_amount) && $income_amount > 0) {
-                    $p9->incomes()->create([
-                        "name" => $data['income_name'][$index],
-                        "amount" => $income_amount,
-                        "expense_amount" => doubleval($data['income_expense_amount'][$index]),
-                        "withholding_tax" => doubleval($data['withholding_tax'][$index]),
+        if (isset($data['income_expense_amount']))
+            foreach ($data['income_expense_amount'] as $item_number => $expense_amounts) {
+                if (empty($data['income_amount'][$item_number][0])) continue;
+                $income = $p9->incomes()->create([
+                    "name" => $data['income_name'][$item_number][0],
+                    "amount" => $data['income_amount'][$item_number][0],
+                ]);
+                $index = 0;
+                foreach ($data['income_expense_amount'][$item_number] as $income_expenses) {
+                    if (empty($income_expenses)) continue;
+                    $income->expenses()->create([
+                        "expense_amount" => $income_expenses,
+                        "withholding_tax" => $data["withholding_tax"][$item_number][$index],
+                        "company_name" => $data['income_expense_company_name'][$item_number][$index],
+                        "company_pin" => $data['income_expense_company_pin'][$item_number][$index],
                     ]);
+                    $index +=1;
                 }
-
-                $index += 1;
             }
+
 
         $nhif = $p9->should_pay_nhif ? $this->calculateNhif($p9->basic_salary) : 0;
         $nssf = $p9->should_pay_nssf ? array_sum($this->calculateNssf($p9->basic_salary)) : 0;
@@ -769,5 +783,12 @@ class GenerateP9Controller extends Controller
         ], compact("segment2"));
 
 
+    }
+
+    public function bookMeeting(Request $request)
+    {
+        return view("tax_return.schedule",[
+            "code" => $request->code
+        ]);
     }
 }
