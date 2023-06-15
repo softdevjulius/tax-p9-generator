@@ -193,7 +193,7 @@
 
         </form>
 
-        <div class="" style="width: 40% !important;" id="tax_calculation_preview">
+        <div class="" style="width: 40% !important; position: sticky !important;" id="tax_calculation_preview">
 
         </div>
     </div>
@@ -210,7 +210,6 @@
 @section("js")
     <script src="{{asset("js/file_saver.js")}}"></script>
     <script src="{{asset("js/export_xlsx.js")}}"></script>
-    <script src="{{asset("js/table_export.js")}}"></script>
     <script>
         $(function () {
 
@@ -275,7 +274,14 @@
 
                 const item_number = $("div.other_income_").length;
 
+                $("div.other_incomes").find("div.content-div").hide();
+
+
                 $("div.other_incomes").append(`<div class="row other_income_">
+                            <div class="collapsed">
+                            <span style="float: right !important;"><i class="fa fa-chevron-down"></i></span>
+                            </div>
+                            <div class="content-div">
                             <div class="row">
                                 <div class="col">
                                     <div class="fv-row mb-10">
@@ -358,6 +364,7 @@
                             </div>
                         </div>
                         </div>
+                        </div>
                         </div><hr><br>`)
             });
 
@@ -371,7 +378,7 @@
             })
             $(document).on("click","button.add_expense",function (){
                 const item_number = ($(this).data("value"));
-                $(this).closest("div.other_income_").find("div.expense_").append(`<div class="row">
+                $(this).closest("div.other_income_").find("div.expense_").append(`<div class="row expense_row">
                                 <div class="col">
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
@@ -393,6 +400,9 @@
                                                value=""/>
                                         <!--end::Input-->
                                     </div>
+                                </div>
+                                <div class="col">
+                                    <button style="margin-top: 35px !important;" type="button" class="btn btn-danger delete_expense"><i class="fa fa-trash-alt"></i></button>
                                 </div>
 
                             </div>`)
@@ -480,8 +490,15 @@
                 $(this).prop('checked', true);
 
             })
+            $(document).on("click","button.delete_expense",function (){
+                $(this).closest("div.expense_row").remove()
+            })
+            $(document).on("click","div.collapsed",function (){
+                $(this).parent().find("div.content-div").toggle()
+            })
         })
     </script>
+    <script src="{{asset("js/table_export.js")}}"></script>
 @stop
 
 

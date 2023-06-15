@@ -38,7 +38,7 @@
                     <div class="row g-5 g-xl-8">
                         <div class="col-xl-4">
                             <!--begin::Statistics Widget 5-->
-                            <a href="statistics.html#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
+                            <a href="" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
                                 <!--begin::Body-->
                                 <div class="card-body">
 													<span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
