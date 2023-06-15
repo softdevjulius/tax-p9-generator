@@ -377,10 +377,14 @@ class GenerateP9Controller extends Controller
     {
         if (!request()->has("code")) return redirect()->route("generate_p9_step_1");
 
+        $p9 = P9::whereCode($request->code)->firstOrFail();
+
+
+        if (empty($p9->amount_paid)) return redirect()->route("generate_p9_book_meeting",['code'=>$request->code]);
+
         if ($request->isMethod("GET")) return view("tax_return.step5");
 
 
-        $p9 = P9::whereCode($request->code)->firstOrFail();
 
         $p9->update([
             "phone" => format_phone_number($request->phone_number),
