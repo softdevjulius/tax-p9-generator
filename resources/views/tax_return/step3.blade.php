@@ -330,35 +330,13 @@
                                         <!--end::Input-->
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label ">Company Name</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input name="income_expense_company_name[${item_number}][]" type="text" class="taxable form-control form-control-lg form-control-solid"
-                                               value=""/>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label "> Company PIN</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input name="income_expense_company_pin[${item_number}][]" type="text" class="taxable form-control form-control-lg form-control-solid"
-                                               value=""/>
-                                        <!--end::Input-->
-                                    </div>
-                            </div>
                         <div class="w-25 mt-10">
                            <button type="button" class="btn btn-sm btn-danger btn-circle delete_income"><i class="fa fa-trash fa-3x"></i></button>
 
                        </div>
+                            </div>
+                           
+
                            <button data-value="${item_number}" type="button" class="btn btn-sm btn-primary btn-circle add_expense w-50"><i class="fa fa-plus fa-3x"></i> Add Expense</button>
 
                             </div>
