@@ -9,6 +9,7 @@
             <input type="hidden" name="code" value="{{request()->code}}">
 
             <div class="current" data-kt-stepper-element="content">
+
                 <!--begin::Wrapper-->
                 <div class="w-100">
                     <!--begin::Heading-->
@@ -16,8 +17,8 @@
                     <!--end::Heading-->
                     <!--begin::Input group-->
 
-
                     <div class="row">
+
                         <div class="full">
                             <h3>Statutory Deductions:</h3>
                         </div>
@@ -335,7 +336,7 @@
 
                        </div>
                             </div>
-                           
+
 
                            <button data-value="${item_number}" type="button" class="btn btn-sm btn-primary btn-circle add_expense w-50"><i class="fa fa-plus fa-3x"></i> Add Expense</button>
 

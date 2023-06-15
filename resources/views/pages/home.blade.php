@@ -135,7 +135,7 @@
                                      data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
                                      data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                                      style="z-index: 6; white-space: nowrap; font-size: 200px; line-height: 110px; font-weight: 400; color: #005596 !important; letter-spacing: 0px;font-family:Poppins;">
-                                    Thing.
+                                    TaxGenius.
                                 </div>
                                 <div class="tp-caption   tp-resizeme rs-parallaxlevel-7" id="slide-1-layer-8"
                                      data-x="center" data-hoffset="" data-y=""
@@ -170,7 +170,7 @@
                                      data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
                                      data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                                      style="z-index: 9; white-space: nowrap; font-size: 32px; line-height: 32px; font-weight: 500; color: #d2d2d2; letter-spacing: 0px;font-family:Poppins;">
-                                    The one and only
+                                   Oursourced
                                 </div>
                                 <a href="{{route("generate_p9")}}" class="tp-caption rev-btn  tp-resizeme rs-parallaxlevel-2" id="slide-1-layer-3"
                                      data-x="center" data-hoffset="" data-y="center" data-voffset="173"
