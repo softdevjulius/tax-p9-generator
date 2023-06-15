@@ -56,37 +56,37 @@
                     <div class="column one">
                         <div class="top_bar_left clearfix">
                             <div class="logo">
-                                <a id="logo" href="{{route("landing")}}" title="" data-height="60" data-padding="15"><img
-                                        class="logo-main scale-with-grid" src="{{asset("asset/images/logo.png")}}"
-                                        data-retina="{{asset("asset/images/logo.png")}}" data-height="34"
+                                <a style="height: 40px !important;" id="logo" href="{{route("landing")}}" title="" data-height="60" data-padding="15"><img
+                                        class="logo-main scale-with-grid" src="{{asset("logo.png")}}"
+                                        data-retina="{{asset("logo.png")}}" data-height="34"
                                         alt="company3"><img class="logo-sticky scale-with-grid"
-                                                            src="{{asset("asset/images/logo.png")}}"
-                                                            data-retina="{{asset("asset/images/logo.png")}}"
+                                                            src="{{asset("logo.png")}}"
+                                                            data-retina="{{asset("logo.png")}}"
                                                             data-height="34" alt="company3"><img
-                                        class="logo-mobile scale-with-grid" src="{{asset("asset/images/logo.png")}}"
-                                        data-retina="{{asset("asset/images/logo.png")}}" data-height="34"
+                                        class="logo-mobile scale-with-grid" src="{{asset("logo.png")}}"
+                                        data-retina="{{asset("logo.png")}}" data-height="34"
                                         alt="company3"><img class="logo-mobile-sticky scale-with-grid"
-                                                            src="{{asset("asset/images/logo.png")}}"
-                                                            data-retina="{{asset("asset/images/logo.png")}}"
+                                                            src="{{asset("logo.png")}}"
+                                                            data-retina="{{asset("logo.png")}}"
                                                             data-height="34" alt="Logo"></a>
                             </div>
                             <div class="menu_wrapper">
                                 <nav id="menu">
                                     <ul id="menu-main-menu" class="menu menu-main">
                                         <li class="current-menu-item">
-                                            <a href="{{route('landing')}}"><span>HOME</span></a>
+                                            <a style="color: #005596 !important;" href="{{route('landing')}}"><span>HOME</span></a>
                                         </li>
 
                                         <li>
-                                            <a href="{{route("paye_calculator")}}"><span>PAYE CALCULATOR</span></a>
+                                            <a style="color: #005596 !important;" href="{{route("paye_calculator")}}"><span>PAYE CALCULATOR</span></a>
                                         </li>
 
                                         <li>
-                                            <a href="{{route("generate_p9")}}"><span><span
-                                                        style="padding:0;color:rgb(1, 47, 107);"> TAX RETURNS </span></span></a>
+                                            <a style="color: #005596 !important;" href="{{route("generate_p9")}}"><span><span
+                                                        style="padding:0"> TAX RETURNS </span></span></a>
                                         </li>
 
-                                        
+
                                     </ul>
                                 </nav>
                                 <a class="responsive-menu-toggle" href="i#"><i class="icon-menu-fine"></i></a>
@@ -134,7 +134,7 @@
                                      data-textAlign="['inherit','inherit','inherit','inherit']"
                                      data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
                                      data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                                     style="z-index: 6; white-space: nowrap; font-size: 200px; line-height: 110px; font-weight: 400; color: rgb(1, 47, 107);; letter-spacing: 0px;font-family:Poppins;">
+                                     style="z-index: 6; white-space: nowrap; font-size: 200px; line-height: 110px; font-weight: 400; color: #005596 !important; letter-spacing: 0px;font-family:Poppins;">
                                     Thing.
                                 </div>
                                 <div class="tp-caption   tp-resizeme rs-parallaxlevel-7" id="slide-1-layer-8"
@@ -172,7 +172,7 @@
                                      style="z-index: 9; white-space: nowrap; font-size: 32px; line-height: 32px; font-weight: 500; color: #d2d2d2; letter-spacing: 0px;font-family:Poppins;">
                                     The one and only
                                 </div>
-                                <div class="tp-caption rev-btn  tp-resizeme rs-parallaxlevel-2" id="slide-1-layer-3"
+                                <a href="{{route("generate_p9")}}" class="tp-caption rev-btn  tp-resizeme rs-parallaxlevel-2" id="slide-1-layer-3"
                                      data-x="center" data-hoffset="" data-y="center" data-voffset="173"
                                      data-width="['auto']" data-height="['auto']" data-type="button"
                                      data-responsive_offset="on"
@@ -180,9 +180,9 @@
                                      data-textAlign="['inherit','inherit','inherit','inherit']"
                                      data-paddingtop="[17,17,17,17]" data-paddingright="[80,80,80,80]"
                                      data-paddingbottom="[17,17,17,17]" data-paddingleft="[80,80,80,80]"
-                                     style="z-index: 10; white-space: nowrap; font-size: 14px; line-height: 15px; font-weight: 700; color: rgba(255,255,255,1); letter-spacing: 5px;font-family:Poppins;background-color:rgb(1, 47, 107);border-color:rgb(1, 47, 107);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">
+                                     style="z-index: 10; white-space: nowrap; font-size: 14px; line-height: 15px; font-weight: 700; color: rgba(255,255,255,1); letter-spacing: 5px;font-family:Poppins;background-color:#005596;border-color:rgb(1, 47, 107);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">
                                     TAX RETURNS
-                                </div>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -307,7 +307,7 @@
                 <div class="column two-third">
                     <aside class="widget_text widget widget_custom_html">
                         <div class="textwidget custom-html-widget">
-                            <h3>Company Name</h3>
+                            <h3>Equinox</h3>
                             <hr class="no_line" style="margin:0 auto 20px">
                             <div class="column one-second">
                                 <p>
@@ -317,8 +317,8 @@
                             </div>
                             <div class="column one-second">
                                 <p>
-                                    <a href="index-company3.html#"><span>info@company.com</span></a>
-                                    <br> +254 (0) 723 836 624
+                                    <a href="mailto:info@eqncs.com"><span>info@eqncs.com</span></a>
+                                    <br> +254 (0) 720 980 956
                                     <br>
                                 </p>
                             </div>
@@ -333,16 +333,16 @@
                                     <div class="image_wrapper">
                                         <a href="#">
                                             <div class="mask"></div>
-                                            <img class="scale-with-grid"
-                                                 src="{{asset("content/company3/images/home_company3_pic8.png")}}">
+                                            <img class="scale-with-grid" style="height: 40px !important;"
+                                                 src="{{asset("logo.png")}}">
                                         </a>
                                         <div class="image_links ">
-                                            <a href="index-company3.html#" class="link"><i class="icon-link"></i></a>
+                                            <a href="mailto:info@eqncs.com" class="link"><i class="icon-link"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <hr class="no_line" style="margin:0 auto 50px">
-                                <a class="button button_size_2 button_js" href="business.html" style="color:#fff;"><span
+                                <a class="button button_size_2 button_js" href="{{route("general_p9_talk_to_expert")}}" style="color:#fff;"><span
                                         class="button_label">Book Consulting</span></a>
                             </div>
                         </div>

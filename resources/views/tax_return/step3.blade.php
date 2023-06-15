@@ -305,7 +305,7 @@
                                 <div class="col">
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label ">Expenses Amount</label>
+                                        <label class="form-label ">Withholding Amount</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
                                         <input name="income_expense_amount[${item_number}][]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
@@ -371,14 +371,14 @@
             })
             $(document).on("click","button.add_expense",function (){
                 const item_number = ($(this).data("value"));
-                $(this).closest("div.other_income_").find("div.expense_").prepend(`<div class="row">
+                $(this).closest("div.other_income_").find("div.expense_").append(`<div class="row">
                                 <div class="col">
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label ">Expenses Amount</label>
+                                        <label class="form-label ">Expense Name</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input name="income_expense_amount[${item_number}][]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
+                                        <input name="expense_name[${item_number}][]" type="text" class="taxable form-control form-control-lg form-control-solid"
                                                value=""/>
                                         <!--end::Input-->
                                     </div>
@@ -386,40 +386,16 @@
                                 <div class="col">
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label "> Withholding Tax (in %)</label>
+                                        <label class="form-label ">Expense Amount</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input name="withholding_tax[${item_number}][]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
+                                        <input name="expense_amount[${item_number}][]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
                                                value=""/>
                                         <!--end::Input-->
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label ">Company Name</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input name="income_expense_company_name[${item_number}][]" type="text" class="taxable form-control form-control-lg form-control-solid"
-                                               value=""/>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label "> Company PIN</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input name="income_expense_company_pin[${item_number}][]" type="text" class="taxable form-control form-control-lg form-control-solid"
-                                               value=""/>
-                                        <!--end::Input-->
-                                    </div>
-                            </div>
-                        </div>`)
+                            </div>`)
             })
             $(document).on("input", "input.taxable", function () {
                 update_tax_records()
