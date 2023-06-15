@@ -170,7 +170,7 @@
                                      data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
                                      data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                                      style="z-index: 9; white-space: nowrap; font-size: 32px; line-height: 32px; font-weight: 500; color: #d2d2d2; letter-spacing: 0px;font-family:Poppins;">
-                                   Oursourced
+                                   EQN
                                 </div>
                                 <a href="{{route("generate_p9")}}" class="tp-caption rev-btn  tp-resizeme rs-parallaxlevel-2" id="slide-1-layer-3"
                                      data-x="center" data-hoffset="" data-y="center" data-voffset="173"
