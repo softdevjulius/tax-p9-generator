@@ -795,4 +795,18 @@ class GenerateP9Controller extends Controller
             "code" => $request->code
         ]);
     }
+
+    public function talkToExpert(Request $request)
+    {
+        //create p9
+        $p9 = P9::create([
+            "account_type" => P9::ACCOUNT_TYPES['INDIVIDUAL']
+        ]);
+
+        //redirect to payment page..
+        return redirect()->route("generate_p9_step_6",['code'=>$p9->code])->with([
+            "success" => 1,
+            "msg" => "Make payment to proceed",
+        ]);
+    }
 }

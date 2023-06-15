@@ -17,8 +17,8 @@
                     <!--end::Title-->
                     <!--begin::Notice-->
 
-                    <div class="text-muted fw-semibold fs-6">If you need help,
-                        <a href="javascript:void(0);" class="link-primary fw-bold">Talk to an Expert</a>.
+                    <div class="text-muted fw-semibold fs-6">Need help?
+                        <a href="{{route("general_p9_talk_to_expert")}}" class="link-primary fw-bold">Talk to an Expert</a>.
                     </div>
                     <!--end::Notice-->
                 </div>

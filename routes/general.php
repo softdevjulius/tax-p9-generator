@@ -10,6 +10,7 @@ Route::get("generate-p9",[PageController::class,'generateP9'])->name("generate_p
 Route::match(["GET","POST"],"paye-calculator",[PageController::class,'payeCalculator'])->name("paye_calculator");
 
 Route::group(['prefix' => "generate-p9"],function (){
+    Route::match(['GET',"POST"],"talk-to-expert",[GenerateP9Controller::class,'talkToExpert'])->name("general_p9_talk_to_expert");
     Route::match(['GET',"POST"],'step-1',[GenerateP9Controller::class,'step1'])->name("generate_p9_step_1");
     Route::match(['GET',"POST"],'step-2',[GenerateP9Controller::class,'step2'])->name("generate_p9_step_2");
     Route::match(['GET',"POST"],'step-3',[GenerateP9Controller::class,'step3'])->name("generate_p9_step_3");

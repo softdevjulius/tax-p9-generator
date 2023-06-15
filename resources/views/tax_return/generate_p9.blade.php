@@ -180,9 +180,9 @@ License: For each use you must have a valid license purchased only from above li
                         </div>
                         <!--end::Step 3-->
                         <!--begin::Step 4-->
-                        <div class="stepper-item {{$segment2=="step-4"?"current":""}}" data-kt-stepper-element="nav">
+                        <div class="stepper-item {{$segment2=="step-6"?"current":""}}" data-kt-stepper-element="nav">
                             <!--begin::Wrapper-->
-                            <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" class="stepper-wrapper">
+                            <a href="{{route("generate_p9_step_6",['code' => request()->code])}}" class="stepper-wrapper">
                                 <!--begin::Icon-->
                                 <div class="stepper-icon rounded-3">
                                     <i class="{{str_replace("step-","",$segment2)<=4?"stepper-check":""}} fas fa-check"></i>
