@@ -168,8 +168,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Icon-->
                                 <!--begin::Label-->
                                 <div class="stepper-label">
-                                    <h3 class="stepper-title fs-2">Other Income and Deductions</h3>
-                                    <div class="stepper-desc fw-normal">Other Income and Deductions</div>
+                                    <h3 class="stepper-title fs-2">Other Incomes and Deductions</h3>
+                                    <div class="stepper-desc fw-normal">Other Incomes and Deductions</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
