@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('p9_income_expenses', function (Blueprint $table) {
+        Schema::create('p9_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("income_id")
-                ->constrained("p9_incomes")
+            $table->foreignId("p9_id")
+                ->constrained("p9_s")
                 ->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string("expense_name")->nullable();
-            $table->decimal("expense_amount")->nullable();
-//            $table->string("withholding_tax")->nullable();
-//            $table->string("company_name")->nullable();
-//            $table->string("company_pin")->nullable();
+            $table->foreignId("income_id")->nullable()
+                ->constrained("p9_incomes")
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string("path")->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p9_income_expenses');
+        Schema::dropIfExists('p9_files');
     }
 };

@@ -75,7 +75,7 @@
                         <input required type="number" class="form-control form-control-lg form-control-solid"
                                name="basic_salary" id="basic_salary" placeholder="" value="{{$p9->basic_salary}}"/>
                         <div class="input-group-append">
-                            <button type="button" id="customize_basic_salary" class="btn btn-primary"><i class="fa fa-cogs"></i> Customize</button>
+                            <button data-toggle="tooltip" data-placement="top" title="Customization is variable income and expenses. This includes bonus pay, wage increase, gratuity, interest expense etc" type="button" id="customize_basic_salary" class="btn btn-primary"><i class="fa fa-cogs"></i> Customize</button>
                         </div>
                     </div>
 
@@ -149,6 +149,8 @@
 @section("js")
     <script>
         $(function (){
+
+            $('#customize_basic_salary').tooltip()
 
 
             $("input#kra_pin").on("blur",function (){

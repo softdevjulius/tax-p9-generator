@@ -32,103 +32,6 @@
                     </div>
                     <!--end::Page title-->
                     <!--begin::Actions-->
-                    <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        <!--begin::Filter menu-->
-                        <div class="m-0">
-                            <!--begin::Menu toggle-->
-                            <a href="list.html#" class="btn btn-sm btn-flex bg-body btn-color-gray-700 btn-active-color-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                                <span class="svg-icon svg-icon-6 svg-icon-muted me-1">
-												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
-												</svg>
-											</span>
-                                <!--end::Svg Icon-->Filter</a>
-                            <!--end::Menu toggle-->
-                            <!--begin::Menu 1-->
-                            <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_63a9799b0beca">
-                                <!--begin::Header-->
-                                <div class="px-7 py-5">
-                                    <div class="fs-5 text-dark fw-bold">Filter Options</div>
-                                </div>
-                                <!--end::Header-->
-                                <!--begin::Menu separator-->
-                                <div class="separator border-gray-200"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Form-->
-                                <div class="px-7 py-5">
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label fw-semibold">Status:</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <div>
-                                            <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_63a9799b0beca" data-allow-clear="true">
-                                                <option></option>
-                                                <option value="1">Approved</option>
-                                                <option value="2">Pending</option>
-                                                <option value="2">In Process</option>
-                                                <option value="2">Rejected</option>
-                                            </select>
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label fw-semibold">Member Type:</label>
-                                        <!--end::Label-->
-                                        <!--begin::Options-->
-                                        <div class="d-flex">
-                                            <!--begin::Options-->
-                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                                <input class="form-check-input" type="checkbox" value="1" />
-                                                <span class="form-check-label">Author</span>
-                                            </label>
-                                            <!--end::Options-->
-                                            <!--begin::Options-->
-                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                                <span class="form-check-label">Name</span>
-                                            </label>
-                                            <!--end::Options-->
-                                        </div>
-                                        <!--end::Options-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label fw-semibold">Notifications:</label>
-                                        <!--end::Label-->
-                                        <!--begin::Switch-->
-                                        <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                            <label class="form-check-label">Enabled</label>
-                                        </div>
-                                        <!--end::Switch-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex justify-content-end">
-                                        <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                                        <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </div>
-                                <!--end::Form-->
-                            </div>
-                            <!--end::Menu 1-->
-                        </div>
-                        <!--end::Filter menu-->
-                        <!--begin::Secondary button-->
-                        <!--end::Secondary button-->
-                        <!--begin::Primary button-->
-                        <a href="list.html#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-                        <!--end::Primary button-->
-                    </div>
                     <!--end::Actions-->
                 </div>
                 <!--end::Toolbar container-->
@@ -281,11 +184,11 @@
                                 <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                    <th class="w-10px pe-2">
+                                    {{--<th class="w-10px pe-2">
                                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_subscriptions_table .form-check-input" value="1" />
                                         </div>
-                                    </th>
+                                    </th>--}}
                                     <th class="min-w-125px">Name</th>
                                     <th class="min-w-125px">Category</th>
                                     <th class="min-w-125px">Status</th>
@@ -301,15 +204,15 @@
                                 @forelse($payments as $payment)
                                     <tr>
                                         <!--begin::Checkbox-->
-                                        <td>
+                                        {{--<td>
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                                 <input class="form-check-input" type="checkbox" value="1" />
                                             </div>
-                                        </td>
+                                        </td>--}}
                                         <!--end::Checkbox-->
                                         <!--begin::Customer=-->
                                         <td>
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$payment -> name}}</a>
+                                            <a href="{{$url = route("payment_detail",['id'=>encrypt($payment->id)])}}" class="text-gray-800 text-hover-primary mb-1">{{$payment -> name}}</a>
                                         </td>
                                         <!--end::Customer=-->
                                         <!--begin::Status=-->
@@ -336,32 +239,10 @@
                                         <!--end::Date=-->
                                         <!--begin::Action=-->
                                         <td class="text-end">
-                                            <a href="list.html#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                                <span class="svg-icon svg-icon-5 m-0">
-																<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																	<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />
-																</svg>
-															</span>
-                                                <!--end::Svg Icon--></a>
-                                            <!--begin::Menu-->
-                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="add.html" class="menu-link px-3">View</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="add.html" class="menu-link px-3">Edit</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="list.html#" data-kt-subscriptions-table-filter="delete_row" class="menu-link px-3">Delete</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
+                                            <a href="{{$url}}" class="btn btn-light btn-active-light-primary">
+                                                <i class="fa fa-eye"></i>
+                                                View
+                                            </a>
                                             <!--end::Menu-->
                                         </td>
                                         <!--end::Action=-->

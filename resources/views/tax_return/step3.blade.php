@@ -4,7 +4,7 @@
 
     <div class="row">
         <form class="" id="tax_record_form" style="width: 60% !important;" action="{{route("generate_p9_step_3")}}"
-              method="post">
+              method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="code" value="{{request()->code}}">
 
@@ -157,7 +157,7 @@
 											<span
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
-                    <a href="{{route("generate_p9_step_4",['code' => request()->code])}}" type="submit"
+                    {{--<a href="{{route("generate_p9_step_4",['code' => request()->code])}}" type="submit"
                        class="btn btn-lg btn-warning">
                         Skip
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
@@ -171,7 +171,7 @@
                                                     fill="currentColor"/>
 											</svg>
 										</span>
-                        <!--end::Svg Icon--></a>
+                        <!--end::Svg Icon--></a>--}}
 
                     <button type="submit" class="btn btn-lg btn-primary">
                         Continue
@@ -331,11 +331,26 @@
                                         <!--end::Input-->
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label "> Upload Documents</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input multiple name="upload_documents[${item_number}][]" type="file" class="taxable form-control form-control-lg form-control-solid"
+                                               value=""/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
                         <div class="w-25 mt-10">
                            <button type="button" class="btn btn-sm btn-danger btn-circle delete_income"><i class="fa fa-trash fa-3x"></i></button>
 
                        </div>
-                            </div>
+                        </div>
 
 
                            <button data-value="${item_number}" type="button" class="btn btn-sm btn-primary btn-circle add_expense w-50"><i class="fa fa-plus fa-3x"></i> Add Expense</button>
@@ -348,12 +363,38 @@
             });
 
             $(document).on("click", "button.remove_allowance, button.remove_deduction", function () {
-                $(this).closest("div.row").remove()
-                update_tax_records()
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to delete?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).closest("div.row").remove()
+                        update_tax_records()
+                    }
+                })
+
             })
             $(document).on("click", "button.delete_income", function () {
-                $(this).closest("div.other_income_").remove()
-                update_tax_records()
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to delete?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).closest("div.other_income_").remove()
+                        update_tax_records()
+                    }
+                })
             })
             $(document).on("click","button.add_expense",function (){
                 const item_number = ($(this).data("value"));

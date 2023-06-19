@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Notifications\SendP9Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Repo\TaxHandler;
 use function GuzzleHttp\Promise\all;
 
@@ -78,6 +79,37 @@ class GenerateP9Controller extends Controller
         if ($request->isMethod("GET")) return view("tax_return.step3");
 
         $p9 = P9::whereCode($request->code)->firstOrFail();
+
+        //expense
+
+    if ($request->hasFile("upload_documents"))
+        foreach ($request->upload_documents as $income_id =>  $documents) {
+
+            foreach ($documents as $document) {
+                $path = Storage::disk("local")->put("uploads",$document);
+
+                ($p9->files()->create([
+                    "path" => $path,
+                    "income_id" => $p9->incomes->skip($income_id)->value("id")
+                ]));
+            }
+
+        }
+
+    //add income expenses..
+        if ($request->expense_amount)
+        foreach ($request->expense_amount as $income_id => $expense_amounts) {
+            foreach ($expense_amounts as $index => $expense_amount) {
+                $income = $p9->incomes->skip($income_id)->firstOrFail();
+                $income -> expenses()->create([
+                   "expense_name" => $request["expense_name"][$income_id][$index],
+                   "expense_amount" => $request["expense_amount"][$income_id][$index],
+//                   "withholding_tax" => '',
+//                   "company_name" => '',
+//                   "company_pin" => '',
+                ]);
+            }
+        }
 
         //add incomes
         //alongside income expenses

@@ -94,6 +94,11 @@ class P9 extends Model
         return $this->hasMany(P9TenantWife::class,'p9_id');
     }
 
+    public function files():HasMany
+    {
+        return $this->hasMany(P9File::class,'p9_id');
+    }
+
     public static function boot()
     {
         parent::boot();

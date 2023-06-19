@@ -14,4 +14,9 @@ class P9Income extends Model
     {
         return $this->hasMany(p9IncomeExpense::class,'income_id');
     }
+
+    public function files()
+    {
+        return $this->hasMany(P9File::class,'income_id');
+    }
 }

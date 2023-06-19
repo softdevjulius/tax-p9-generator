@@ -18,8 +18,16 @@ class AdminController extends Controller
 
     public function payment()
     {
-        $payments = P9::query()->orderByDesc("id")
-            ->get();
+        $payments = P9::query()->latest("id")->get();
+
         return view("admin.payment",compact("payments"));
+    }
+
+    public function paymentDetail($id)
+    {
+        $payment = P9::findOrFail(decrypt($id));
+        $booking_revenue = 100;
+
+        return view("admin.payment_view",compact("payment","booking_revenue"));
     }
 }
