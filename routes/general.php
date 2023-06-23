@@ -35,6 +35,8 @@ Route::group(['prefix' => "generate-p9"],function (){
     Route::match(['GET',"POST"],'send-email',[GenerateP9Controller::class,'sendEmail'])->name("generate_p9_send_email");
     Route::match(['GET'],'download-p9/{id}',[GenerateP9Controller::class,'downloadP9'])->name("generate_p9_download_p9");
 
+    Route::get("pesapal-confirmation",[GenerateP9Controller::class,'pesapalConfirmation'])->name("generate_p9_pesapal_confirmation");
+
 });
 
 Route::group(['prefix' => "business"],function (){

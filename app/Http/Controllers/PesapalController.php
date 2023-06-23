@@ -52,7 +52,7 @@ class PesapalController extends Controller
 
         $iframelink = $this->api_link('PostPesapalDirectOrderV4');
 
-        $callback_url = url('/') . '/pesapal-callback'; //redirect url, the page that will handle the response from pesapal.
+        $callback_url = route("generate_p9_pesapal_confirmation",['code' => $request['code']]); //redirect url, the page that will handle the response from pesapal.
 
         $post_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>
                         <PesapalDirectOrderInfo
@@ -112,13 +112,14 @@ class PesapalController extends Controller
     }
 
     //Confirm status of transaction and update the DB
-    public function checkpaymentstatus($trackingid, $merchant_reference, $pesapal_notification_type)
+    public function checkpaymentstatus($trackingid, $merchant_reference, $pesapal_notification_type=null)
     {
         $status = Pesapal::getMerchantStatus($merchant_reference);
-        $payments = Payment::where('trackingid', $trackingid)->first();
-        $payments->status = $status;
-        $payments->payment_method = "PESAPAL";//use the actual method though...
-        $payments->save();
+        dd($status);
+//        $payments = Payment::where('trackingid', $trackingid)->first();
+//        $payments->status = $status;
+//        $payments->payment_method = "PESAPAL";//use the actual method though...
+//        $payments->save();
         return "success";
     }
 }

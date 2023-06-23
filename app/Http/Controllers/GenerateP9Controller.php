@@ -10,6 +10,9 @@ use App\Notifications\SendP9Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Knox\Pesapal\OAuth\OAuthConsumer;
+use Knox\Pesapal\OAuth\OAuthRequest;
+use Knox\Pesapal\OAuth\OAuthSignatureMethod_HMAC_SHA1;
 use Repo\TaxHandler;
 use function GuzzleHttp\Promise\all;
 
@@ -848,5 +851,75 @@ class GenerateP9Controller extends Controller
             "success" => 1,
             "msg" => "Make payment to proceed",
         ]);
+    }
+
+    public function pesapalConfirmation(Request $request)
+    {
+        $status = ($this->checkMerchantStatus($request->pesapal_merchant_reference));
+
+        if ($status !== "COMPLETED")
+            return redirect()->route("generate_p9_step_6",['code'=>$request->code])->with([
+                "success" => 0,
+                "msg" => "Transaction not completed. Try again",
+            ]);
+
+        $p9 = P9::whereCode($request->code)->firstOrFail();
+
+        $p9->update([
+            "amount_paid" => $p9->amount,
+        ]);
+
+        return redirect()->route("generate_p9_book_meeting",['code'=>$request->code])->with([
+            "success"  => 1,
+            "msg"  => "Successfully completed payment",
+        ]);
+
+    }
+
+    public function checkMerchantStatus($pesapal_merchant_reference)
+    {
+        $consumer_key = env("PESAPAL_KEY");
+
+        $consumer_secret = env("PESAPAL_SECRET");
+
+        $statusrequestAPI = "https://www.pesapal.com/api/".('querypaymentstatusbymerchantref');
+
+        $token = $params = NULL;
+        $consumer = new OAuthConsumer($consumer_key, $consumer_secret);
+        $signature_method = new OAuthSignatureMethod_HMAC_SHA1();
+
+        //get transaction status
+        $request_status = OAuthRequest::from_consumer_and_token($consumer, $token, "GET", $statusrequestAPI, $params);
+        $request_status->set_parameter("pesapal_merchant_reference", $pesapal_merchant_reference);
+        $request_status->sign_request($signature_method, $consumer, $token);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $request_status);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        if (defined('CURL_PROXY_REQUIRED')) {
+            if (CURL_PROXY_REQUIRED == 'True') {
+                $proxy_tunnel_flag = (defined('CURL_PROXY_TUNNEL_FLAG') && strtoupper(CURL_PROXY_TUNNEL_FLAG) == 'FALSE') ? false : true;
+                curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, $proxy_tunnel_flag);
+                curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+                curl_setopt($ch, CURLOPT_PROXY, CURL_PROXY_SERVER_DETAILS);
+            }
+        }
+
+        $response = curl_exec($ch);
+
+        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $raw_header = substr($response, 0, $header_size - 4);
+        $headerArray = explode("\r\n\r\n", $raw_header);
+        $header = $headerArray[count($headerArray) - 1];
+
+        //transaction status
+        $elements = preg_split("/=/", substr($response, $header_size));
+        $status = $elements[1];
+
+        curl_close($ch);
+
+        return $status;
     }
 }
