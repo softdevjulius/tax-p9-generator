@@ -59,7 +59,7 @@ class TestController extends Controller
 
 //display pesapal - iframe and pass iframe_src
 
-echo '<iframe src="'.$iframe_src.'" width="100%" height="700px"  scrolling="no" frameBorder="0">
+return '<iframe src="'.$iframe_src.'" width="100%" height="700px"  scrolling="no" frameBorder="0">
             <p>Browser unable to load iFrame</p>
         </iframe>';
     }
