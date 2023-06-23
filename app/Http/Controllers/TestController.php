@@ -44,7 +44,16 @@ class TestController extends Controller
 
         $callback_url = 'https://siniam.com'; //redirect url, the page that will handle the response from pesapal.
 
-        $post_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><PesapalDirectOrderInfo xmlns:xsi=\"https://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"https://www.w3.org/2001/XMLSchema\" Amount=\"".$amount."\" Description=\"".$desc."\" Type=\"".$type."\" Reference=\"".$reference."\" FirstName=\"".$first_name."\" LastName=\"".$last_name."\" Email=\"".$email."\" PhoneNumber=\"".$phonenumber."\" xmlns=\"https://www.pesapal.com\" />";
+/*        $post_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><PesapalDirectOrderInfo xmlns:xsi=\"https://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"https://www.w3.org/2001/XMLSchema\" Amount=\"".$amount."\" Description=\"".$desc."\" Type=\"".$type."\" Reference=\"".$reference."\" FirstName=\"".$first_name."\" LastName=\"".$last_name."\" Email=\"".$email."\" PhoneNumber=\"".$phonenumber."\" xmlns=\"https://www.pesapal.com\" />";*/
+        $post_xml = "<?xml version='1.0' encoding='utf-8'?>
+        <PesapalDirectOrderInfo >
+            <PhoneNumber>$phonenumber</PhoneNumber>
+            <Email>$email</Email>
+            <Reference>$reference</Reference>
+            <Type>MERCHANT</Type>
+            <Description>Payment Desc</Description>
+            <Amount>$amount</Amount>
+        </PesapalDirectOrderInfo>";
         $post_xml = htmlentities($post_xml);
 
         $consumer = new \OAuthConsumer($consumer_key, $consumer_secret);
@@ -59,7 +68,7 @@ class TestController extends Controller
 
 //display pesapal - iframe and pass iframe_src
 
-return '<iframe src="'.$iframe_src.'" width="100%" height="700px"  scrolling="no" frameBorder="0">
+echo '<iframe src="'.$iframe_src.'" width="100%" height="700px"  scrolling="no" frameBorder="0">
             <p>Browser unable to load iFrame</p>
         </iframe>';
     }

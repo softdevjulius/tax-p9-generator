@@ -21,33 +21,77 @@
                 <!--end::Heading-->
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                        <span class="required">Phone Number</span>
-                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
-                           title="Enter yoiur phone and Press pay then check youur phone"></i>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" placeholder=""
-                           name="phone_number" required value=""/>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="d-flex flex-column mb-7 fv-row">
-                    <!--begin::Label-->
-                    <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
-                    <!--end::Label-->
-                    <!--begin::Input wrapper-->
-                    <input type="number" required class="form-control form-control-solid disabled" placeholder=""
-                           name="amount" readonly disabled value="{{get_bill_amount()}}"/>
-                    <input type="hidden" name="amount" value="1">
-                    <!--end::Input wrapper-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
+                    <div class="col-md-12 row">
+                        <div class="col-md-6">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">First Name</span>
+                            </label>
+                            <!--end::Label-->
 
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="first_name" required value=""/>
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold form-label mb-2">Last Name</label>
+                            <!--end::Label-->
+                            <!--begin::Input wrapper-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="last_name" required value=""/>
+                            <!--end::Input wrapper-->
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <div class="col-md-12 row">
+                        <div class="col-md-6">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Phone Number</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                   title="Enter yoiur phone and Press pay then check youur phone"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="phone_number" required value=""/>
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold form-label mb-2">Email</label>
+                            <!--end::Label-->
+                            <!--begin::Input wrapper-->
+                            <input type="email" required class="form-control form-control-solid disabled" placeholder=""
+                                   name="email"/>
+                            <!--end::Input wrapper-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column mb-7 fv-row">
+                    <div class="col-md-12 row">
+                        <div class="col-md-6">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Transaction Code</span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder=""
+                                   name="transaction_code" readonly disabled  value="{{uniqid()}}"/>
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold form-label mb-2">Amount</label>
+                            <!--end::Label-->
+                            <input type="hidden" name="amount" value="{{$amount = get_bill_amount()}}">
+                            <!--begin::Input wrapper-->
+                            <input type="number" required class="form-control form-control-solid disabled" placeholder=""
+                                   name="amount" readonly disabled value="{{$amount}}"/>
+                            <!--end::Input wrapper-->
+                        </div>
+                    </div>
+                </div>
                 <!--end::Input group-->
-                <!--begin::Input group-->
 
                 <!--end::Input group-->
             </div>

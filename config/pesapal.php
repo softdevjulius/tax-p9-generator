@@ -35,7 +35,7 @@ return [
    | false if your account was obtained from https://demo.pesapal.com
    |
    */
-    'is_live' => env('PESAPAL_IS_LIVE', false),
+    'is_live' => env('PESAPAL_IS_LIVE', true),
 
     /*
    |--------------------------------------------------------------------------

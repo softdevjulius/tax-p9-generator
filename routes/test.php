@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-Route::get("pesapal",[\App\Http\Controllers\TestController::class,'pesapal']);
+Route::get("pesapal",[\App\Http\Controllers\PesapalController::class,'initiatePayment']);
 
 Route::get("pusher",function (){
     event(new \App\Events\P9ChargesPaidEvent('hello world','B20C4A9A1FI'));

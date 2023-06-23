@@ -464,6 +464,14 @@ class GenerateP9Controller extends Controller
         }
 
 
+        $p9->update([
+            "phone" => format_phone_number($request->phone_number),
+            "amount" => $request->amount
+        ]);
+
+        return (new PesapalController())->initiatePayment($request);
+
+
 
 
         ////REMOVETHIS
