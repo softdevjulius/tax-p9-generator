@@ -57,17 +57,17 @@
                         <div class="top_bar_left clearfix">
                             <div class="logo">
                                 <a id="logo" href="{{route("landing")}}" title="" data-height="60" data-padding="15"><img
-                                        class="logo-main scale-with-grid" src="{{asset("asset/images/logo.png")}}"
-                                        data-retina="{{asset("asset/images/logo.png")}}" data-height="34"
+                                        class="logo-main scale-with-grid" src="{{asset("logo.png")}}"
+                                        data-retina="{{asset("logo.png")}}" data-height="34"
                                         alt="company3"><img class="logo-sticky scale-with-grid"
-                                                            src="{{asset("asset/images/logo.png")}}"
-                                                            data-retina="{{asset("asset/images/logo.png")}}"
+                                                            src="{{asset("logo.png")}}"
+                                                            data-retina="{{asset("logo.png")}}"
                                                             data-height="34" alt="company3"><img
-                                        class="logo-mobile scale-with-grid" src="{{asset("asset/images/logo.png")}}"
+                                        class="logo-mobile scale-with-grid" src="{{asset("logo.png")}}"
                                         data-retina="{{asset("asset/images/logo.png")}}" data-height="34"
                                         alt="company3"><img class="logo-mobile-sticky scale-with-grid"
-                                                            src="{{asset("asset/images/logo.png")}}"
-                                                            data-retina="{{asset("asset/images/logo.png")}}"
+                                                            src="{{asset("logo.png")}}"
+                                                            data-retina="{{asset("logo.png")}}"
                                                             data-height="34" alt="Logo"></a>
                             </div>
                             <div class="menu_wrapper">
@@ -360,7 +360,7 @@
                 <div class="column two-third">
                     <aside class="widget_text widget widget_custom_html">
                         <div class="textwidget custom-html-widget">
-                            <h3>Company Name</h3>
+                            <h3>Equinox</h3>
                             <hr class="no_line" style="margin:0 auto 20px">
                             <div class="column one-second">
                                 <p>
@@ -370,8 +370,8 @@
                             </div>
                             <div class="column one-second">
                                 <p>
-                                    <a href="index-company3.html#"><span>info@company.com</span></a>
-                                    <br> +254 (0) 723 836 624
+                                    <a href="mailto:info@eqncs.com"><span>info@eqncs.com</span></a>
+                                    <br> +254 (0) 720 980 956
                                     <br>
                                 </p>
                             </div>
@@ -386,16 +386,16 @@
                                     <div class="image_wrapper">
                                         <a href="#">
                                             <div class="mask"></div>
-                                            <img class="scale-with-grid"
-                                                 src="{{asset("content/company3/images/home_company3_pic8.png")}}">
+                                            <img class="scale-with-grid" style="height: 40px !important;"
+                                                 src="{{asset("logo.png")}}">
                                         </a>
                                         <div class="image_links ">
                                             <a href="index-company3.html#" class="link"><i class="icon-link"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="no_line" style="margin:0 auto 50px">
-                                <a class="button button_size_2 button_js" href="business.html" style="color:#fff;"><span
+                                <hr class="no_line" style="margin:0 auto 50px;">
+                                <a class="button button_size_2 button_js" href="{{route("general_p9_talk_to_expert")}}" style="color:#fff;"><span
                                         class="button_label">Book Consulting</span></a>
                             </div>
                         </div>

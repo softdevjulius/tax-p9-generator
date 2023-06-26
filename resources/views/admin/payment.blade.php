@@ -193,7 +193,7 @@
                                     <th class="min-w-125px">Category</th>
                                     <th class="min-w-125px">Status</th>
                                     <th class="min-w-125px">Amount</th>
-                                    <th class="min-w-125px">Booked Date</th>
+                                    <th class="min-w-125px">Booked At</th>
                                     <th class="text-end min-w-70px">Actions</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -235,7 +235,7 @@
                                         <td>KES {{number_format($payment->amount,2)}}</td>
                                         <!--end::Product=-->
                                         <!--begin::Date=-->
-                                        <td>{{Carbon\Carbon::parse($payment->created_at)->toFormattedDateString()}}</td>
+                                        <td>{{Carbon\Carbon::parse($payment->created_at)->toDayDateTimeString()}}</td>
                                         <!--end::Date=-->
                                         <!--begin::Action=-->
                                         <td class="text-end">

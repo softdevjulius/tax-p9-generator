@@ -85,11 +85,11 @@ class GenerateP9Controller extends Controller
 
         //expense
 
-    if ($request->hasFile("upload_documents"))
+    if ($request->has("upload_documents"))
         foreach ($request->upload_documents as $income_id =>  $documents) {
-
             foreach ($documents as $document) {
-                $path = Storage::disk("local")->put("uploads",$document);
+
+                $path = Storage::disk("public")->put("uploads",$document);
 
                 ($p9->files()->create([
                     "path" => $path,
@@ -100,8 +100,8 @@ class GenerateP9Controller extends Controller
         }
 
     //add income expenses..
-        if ($request->expense_amount)
-        foreach ($request->expense_amount as $income_id => $expense_amounts) {
+ /*       if ($request->income_expense_amount)
+        foreach ($request->income_expense_amount as $income_id => $expense_amounts) {
             foreach ($expense_amounts as $index => $expense_amount) {
                 $income = $p9->incomes->skip($income_id)->firstOrFail();
                 $income -> expenses()->create([
@@ -112,32 +112,33 @@ class GenerateP9Controller extends Controller
 //                   "company_pin" => '',
                 ]);
             }
-        }
+        }*/
+
 
         //add incomes
         //alongside income expenses
-//        if (isset($request->income_expense_amount) && sizeof($request->income_expense_amount)) {
-//            foreach ($request->income_expense_amount as $item_number => $expenses) {
-//                //income
-//                if (empty($request->income_name[$item_number])) continue;
-//
-//                $income = $p9->incomes()->create([
-//                    "name" => $request->income_name[$item_number][0],
-//                    "amount" => $request->income_amount[$item_number][0]
-//                ]);
-//                foreach ($expenses as $index => $expense) {
-//                    if (empty($expense)) continue;
-//                    //expense
-//                    $income->expenses()->create([
-//                        "expense_amount" => $request->income_expense_amount[$item_number][$index],
+        if (isset($request->income_expense_amount) && sizeof($request->income_expense_amount)) {
+            foreach ($request->income_expense_amount as $item_number => $expenses) {
+                //income
+                if (empty($request->income_name[$item_number])) continue;
+
+                $income = $p9->incomes()->create([
+                    "name" => $request->income_name[$item_number][0],
+                    "amount" => $request->income_amount[$item_number][0]
+                ]);
+                foreach ($expenses as $index => $expense) {
+                    if (empty($expense)) continue;
+                    //expense
+                    $income->expenses()->create([
+                        "expense_amount" => $request->income_expense_amount[$item_number][$index],
 //                        "withholding_tax" => $request->withholding_tax[$item_number][$index],
 //                        "company_name" => $request->income_expense_company_name[$item_number][$index],
 //                        "company_pin" => $request->income_expense_company_pin[$item_number][$index],
-//                    ]);
-//
-//                }
-//            }
-//        }
+                    ]);
+
+                }
+            }
+        }
         //
 
 

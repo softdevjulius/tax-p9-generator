@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{BusinessController, GenerateP9Controller, PageController};
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get("",[PageController::class,'home'])->name("landing");
@@ -8,6 +9,10 @@ Route::get("",[PageController::class,'home'])->name("landing");
 Route::get("generate-p9",[PageController::class,'generateP9'])->name("generate_p9");
 
 Route::match(["GET","POST"],"paye-calculator",[PageController::class,'payeCalculator'])->name("paye_calculator");
+
+Route::get('payment/{id}', [\App\Http\Controllers\AdminController::class,'paymentDetail'])->name('payment_detail');
+Route::get('payment-show/{id}', [\App\Http\Controllers\AdminController::class,'showPaymentDetails'])->name('payment_show');
+
 
 Route::group(['prefix' => "generate-p9"],function (){
     Route::match(['GET',"POST"],"talk-to-expert",[GenerateP9Controller::class,'talkToExpert'])->name("general_p9_talk_to_expert");
@@ -48,6 +53,10 @@ Route::group(['prefix' => "business"],function (){
 
 });
 
+Route::get("download-file",function (Request $request){
+    $path = $request->path;
+    return response()->download(public_path("storage".DIRECTORY_SEPARATOR.$path));
+})->name('download_file');
 Route::get("closer",function (){
     return view("tax_return.schedule");
 

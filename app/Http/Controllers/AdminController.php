@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\P9;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,11 +24,38 @@ class AdminController extends Controller
         return view("admin.payment",compact("payments"));
     }
 
+    public function showPaymentDetails($id)
+    {
+        return $this->paymentDetail(encrypt(base64_decode($id)));
+    }
+
     public function paymentDetail($id)
     {
-        $payment = P9::findOrFail(decrypt($id));
-        $booking_revenue = 100;
+        $payment = P9::findOrFail(decrypt(($id)));
+        $booking_revenue = get_bill_amount();
+        $name = $payment->name;
+        $link = route("payment_show",['id'=>base64_encode($payment->id)]);
 
-        return view("admin.payment_view",compact("payment","booking_revenue"));
+        return view("admin.payment_view",compact("payment","booking_revenue","name","link"));
+    }
+
+    public function settings()
+    {
+        $settings = Setting::all();
+        return view("admin.settings.index",compact("settings"));
+    }
+
+    public function settingsUpdate($id,Request $request)
+    {
+        if ($request->isMethod("GET"))
+            return view("admin.settings.add_edit",compact("id"));
+//        $setting = Setting::whereId(decrypt($id))->firstOrFail();
+
+        set_settings(Setting::LABEL['BILLED_AMOUNT'],$request->billed_amount);
+
+        return back()->with([
+            "success" => 1,
+            "msg" => "Successfully updated settings",
+        ]);
     }
 }

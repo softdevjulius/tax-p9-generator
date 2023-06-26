@@ -48,6 +48,28 @@ if (!function_exists("trigger_mpesa_stk_push")){
 }
 if (!function_exists("get_bill_amount")) {
     function get_bill_amount(){
-        return 1;
+        return get_settings(\App\Models\Setting::LABEL['BILLED_AMOUNT']);
+    }
+}
+
+if (!function_exists("get_settings"))
+{
+    function get_settings($label)
+    {
+        return \App\Models\Setting::whereSetLabel($label)->value("set_value");
+    }
+}
+
+
+if (!function_exists("set_settings"))
+{
+    function set_settings($label,$value)
+    {
+        return \App\Models\Setting::updateOrCreate([
+            "set_label" => $label,
+        ],[
+            "set_value" => $value,
+            "set_label" => $label,
+        ]);
     }
 }
