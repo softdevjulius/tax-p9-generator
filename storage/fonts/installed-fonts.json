@@ -1,0 +1,36 @@
+{
+    "inter": {
+        "300": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/inter_300_e9871fa4d96b94b3e0f0e69d61a899d3",
+        "normal": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/inter_normal_72162fc38f7a9b7708ce9b52537823e1",
+        "500": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/inter_500_96eb9565dc629712e5fdf2634a1560c9",
+        "600": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/inter_600_c0a9e5f9081a5ae196037115674a957c",
+        "bold": "inter_bold_cbd71dae585ea51627faec68dc3982cf"
+    },
+    "line awesome brands": {
+        "normal": "line_awesome_brands_normal_908cb449f6c6a2aeb0ed70fa058c5d60"
+    },
+    "line awesome free": {
+        "normal": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/line_awesome_free_normal_c3beaaa460e560f4ba6515808dbff906",
+        "900": "line_awesome_free_900_8d7ec2500102acd7034aa072a947b84c"
+    },
+    "font awesome 6 brands": {
+        "normal": "font_awesome_6_brands_normal_38f9296d6d835d5ad0bc986ee59791ff"
+    },
+    "font awesome 6 free": {
+        "normal": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/font_awesome_6_free_normal_506bfdbb71e2368a8a739e55b050757e",
+        "900": "font_awesome_6_free_900_bb307964ed51d6484c999fcad9504c26"
+    },
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_38f9296d6d835d5ad0bc986ee59791ff"
+    },
+    "font awesome 5 free": {
+        "900": "\/Users\/me\/Documents\/codes\/siniam\/tax\/storage\/fonts\/font_awesome_5_free_900_bb307964ed51d6484c999fcad9504c26",
+        "normal": "font_awesome_5_free_normal_506bfdbb71e2368a8a739e55b050757e"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_421e5523a3d91b976ab3b457bff0449d"
+    },
+    "fonticon": {
+        "normal": "fonticon_normal_fcf363b26ebc190e234369c29b5f2d5a"
+    }
+}

@@ -6,6 +6,7 @@ use App\Models\P9;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
+use PDF;
 class AdminController extends Controller
 {
     public function home()
@@ -29,12 +30,20 @@ class AdminController extends Controller
         return $this->paymentDetail(encrypt(base64_decode($id)));
     }
 
-    public function paymentDetail($id)
+    public function paymentDetail($id,Request $request)
     {
+
         $payment = P9::findOrFail(decrypt(($id)));
         $booking_revenue = get_bill_amount();
         $name = $payment->name;
         $link = route("payment_show",['id'=>base64_encode($payment->id)]);
+
+        if ($request->has("download-pdf")){
+            $pdf = PDF::loadView('admin.payment_view', compact("payment","booking_revenue","name","link"));
+
+            return $pdf->download('itsolutionstuff.pdf');
+//            dd("closer");
+        }
 
         return view("admin.payment_view",compact("payment","booking_revenue","name","link"));
     }

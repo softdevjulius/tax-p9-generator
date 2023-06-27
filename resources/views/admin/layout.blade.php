@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html_el">
 <!--begin::Head-->
 <head>
     <title>{{config("app.name")}} | @yield("title","Admin dashboard")</title>
