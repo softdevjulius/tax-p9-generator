@@ -30,8 +30,9 @@ class AdminController extends Controller
         return $this->paymentDetail(encrypt(base64_decode($id)));
     }
 
-    public function paymentDetail($id,Request $request)
+    public function paymentDetail($id)
     {
+        $request = \request();
 
         $payment = P9::findOrFail(decrypt(($id)));
         $booking_revenue = get_bill_amount();
