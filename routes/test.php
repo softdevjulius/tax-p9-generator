@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 Route::get("pesapal",[\App\Http\Controllers\PesapalController::class,'initiatePayment']);
 
 Route::get("pusher",function (){

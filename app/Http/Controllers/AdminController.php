@@ -39,7 +39,15 @@ class AdminController extends Controller
         $name = $payment->name;
         $link = route("payment_show",['id'=>base64_encode($payment->id)]);
 
+
+
         if ($request->has("download-pdf")){
+
+//            $p = P9::query()->latest("id")->first();
+
+            $pdf = \PDF::loadView("download_p9_pdf",['p'=>$payment]);
+            return $pdf->download("p.pdf");
+
             $pdf = PDF::loadView('admin.payment_view', compact("payment","booking_revenue","name","link"));
 
             return $pdf->download('itsolutionstuff.pdf');

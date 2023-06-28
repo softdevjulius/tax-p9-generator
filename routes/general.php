@@ -14,6 +14,7 @@ Route::get('payment/{id}', [\App\Http\Controllers\AdminController::class,'paymen
 Route::get('payment-show/{id}', [\App\Http\Controllers\AdminController::class,'showPaymentDetails'])->name('payment_show');
 
 
+Route::match(['GET',"POST"],"download-pdf",[GenerateP9Controller::class,'downloadPdf'])->name("general_p9_download-pdf");
 Route::group(['prefix' => "generate-p9"],function (){
     Route::match(['GET',"POST"],"talk-to-expert",[GenerateP9Controller::class,'talkToExpert'])->name("general_p9_talk_to_expert");
     Route::match(['GET',"POST"],'step-1',[GenerateP9Controller::class,'step1'])->name("generate_p9_step_1");

@@ -923,4 +923,12 @@ class GenerateP9Controller extends Controller
 
         return $status;
     }
+
+    public function downloadPdf()
+    {
+        $p = P9::query()->latest("id")->first();
+
+        $pdf = \PDF::loadView("download_p9_pdf", compact("p"));
+        return $pdf->download("p.pdf");
+    }
 }
