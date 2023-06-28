@@ -189,7 +189,7 @@
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                     <!--begin::Page title-->
                     <a class="btn btn-primary pull-right" style="float: right !important;" href="mailto:?subject=Equinox {{$name}}!&body={{$link}}"> <i class="fa fa-share"></i> Share</a>
-                    <a class="btn btn-primary pull-right" style="float: right !important;" href="javascript:void(0);" data-href="{{route("payment_detail",['id'=>encrypt($payment->id),'download-pdf'=>1])}}" id="download_pdf"> <i class="fa fa-download"></i> Download PDF</a>
+                    <a class="btn btn-primary pull-right" style="float: right !important;" href="{{route("payment_detail",['id'=>encrypt($payment->id),'download-pdf'=>1])}}" id="download_pdf"> <i class="fa fa-download"></i> Download PDF</a>
 
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                         <!--begin::Title-->
@@ -515,15 +515,15 @@
 
         $(document).ready(function(){
 
-            $("#download_pdf").on("click",function (){
-
-                pdfdoc.fromHTML($("#kt_app_main").html(),10,10,{
-                    "width":110,
-                    "elementHandlers":specialElementHandlers
-                })
-
-                pdfdoc.save('first.pdf');
-            })
+            // $("#download_pdf").on("click",function (){
+            //
+            //     pdfdoc.fromHTML($("#kt_app_main").html(),10,10,{
+            //         "width":110,
+            //         "elementHandlers":specialElementHandlers
+            //     })
+            //
+            //     pdfdoc.save('first.pdf');
+            // })
 
             // $(“#gpdf”).click(function(){
             //
