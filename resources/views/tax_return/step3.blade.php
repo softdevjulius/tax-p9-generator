@@ -315,7 +315,7 @@
                                         <label class="form-label ">Withholding Amount</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input name="income_expense_amount[${item_number}][]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
+                                        <input name="withholding_tax_amount[${item_number}][]" type="number" step="0.01" class="taxable form-control form-control-lg form-control-solid"
                                                value=""/>
                                         <!--end::Input-->
                                     </div>

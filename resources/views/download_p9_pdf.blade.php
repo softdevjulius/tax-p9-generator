@@ -82,6 +82,15 @@
                     </tr>
                 @endif
 
+                @if($p->incomes()->count())
+                    <thead>
+                    <th>Income</th>
+                    <th>Amount</th>
+                    <th>Withholding Tax Amount</th>
+                    <th>Withholding Tax (%)</th>
+                    <th>Attachment(s)</th>
+                    </thead>
+                @endif
                 @forelse($p->incomes as $income)
                     <tr>
 
@@ -90,6 +99,8 @@
                         </td>
 
                         <td>KES {{number_format($income->amount,2)}}</td>
+                        <td>KES {{number_format($income->withholding_tax_amount,2)}}</td>
+                        <td> {{number_format($income->withholding_tax,2)}}</td>
                         <!--end::Product=-->
                         <!--end::Action=-->
                         <td>

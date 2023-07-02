@@ -428,6 +428,8 @@
                                     <th class="min-w-125px">#</th>
                                     <th class="min-w-125px">Name</th>
                                     <th class="min-w-125px">Amount</th>
+                                    <th class="min-w-125px">Withholding Tax Amount</th>
+                                    <th class="min-w-125px">Withholding Tax (%)</th>
                                     <th class="min-w-125px">Attachments</th>
                                     <th class="text-end min-w-70px">Actions</th>
                                 </tr>
@@ -451,6 +453,8 @@
                                         </td>
 
                                         <td>KES {{number_format($income->amount,2)}}</td>
+                                        <td>KES {{number_format($income->withholding_tax_amount,2)}}</td>
+                                        <td>{{number_format($income->withholding_tax,2)}}</td>
                                         <!--end::Product=-->
                                         <!--end::Action=-->
                                         <td>
